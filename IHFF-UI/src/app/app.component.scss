@@ -1,0 +1,52 @@
+.app-container{
+    height: 100vh;
+    width: 100vw;
+    
+    .header {
+        padding: 0px 15px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #34808f;
+        
+        .title {
+            font-size: 25px;
+            font-weight: 700;
+            color: #eee;
+            padding: 10px;
+            font-family: Arial;
+        }
+        
+        .form-name {
+            color: #eee;
+            font-size: 18px;
+            font-family: Arial;
+        }
+    }
+
+    .nav-bar {
+        background-color: #eee;
+
+        .nav-grp {
+            margin: 0px 15px;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+
+            .nav-item {
+                font-size: 16px;
+                margin-right: 10px;
+                padding: 10px 15px;
+                color: #53565a;
+                cursor: pointer;
+            }
+            .nav-item:hover {
+                background-color: #ccc;
+            }
+            .nav-item.active {
+                background-color: #34808f;
+            }
+        }
+    }
+
+}
