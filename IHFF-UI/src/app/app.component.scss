@@ -7,7 +7,7 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        background-color: #34808f;
+        background: linear-gradient(45deg,#34808f40, #34808fcc, #34808f, #34808f);
         
         .title {
             font-size: 25px;
@@ -17,10 +17,12 @@
             font-family: Arial;
         }
         
-        .form-name {
-            color: #eee;
-            font-size: 18px;
-            font-family: Arial;
+        .logo {
+            padding: 10px;
+
+            img{
+                height: 60px;
+            }
         }
     }
 
@@ -40,11 +42,9 @@
                 color: #53565a;
                 cursor: pointer;
             }
-            .nav-item:hover {
-                background-color: #ccc;
-            }
+            .nav-item:hover,
             .nav-item.active {
-                background-color: #34808f;
+                background-color: #ccc;
             }
         }
     }
