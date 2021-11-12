@@ -6,6 +6,10 @@ import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
 import { SurveyFormComponent } from './components/survey-form/survey-form.component';
 import { AudioTranscriptComponent } from './components/audio-transcript/audio-transcript.component';
+import { FormQuestionsComponent } from './components/survey-form/form-questions/form-questions.component';
+import { FormResponsesComponent } from './components/survey-form/form-responses/form-responses.component';
+import { FormCardComponent } from './components/survey-form/form-questions/form-card/form-card.component';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -13,11 +17,15 @@ import { AudioTranscriptComponent } from './components/audio-transcript/audio-tr
     AppComponent,
     SurveyFormComponent,
     AudioTranscriptComponent,
+    FormQuestionsComponent,
+    FormResponsesComponent,
+    FormCardComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    SharedModule
+    SharedModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

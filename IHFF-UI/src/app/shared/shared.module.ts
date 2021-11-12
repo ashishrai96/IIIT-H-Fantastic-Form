@@ -1,17 +1,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {AvatarModule} from 'primeng/avatar';
-
+import {ToggleButtonModule} from 'primeng/togglebutton';
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+  ],
   imports: [
     CommonModule,
-    AvatarModule
+    AvatarModule,
+    ToggleButtonModule
   ],
   exports: [
-    AvatarModule
+    AvatarModule,
+    ToggleButtonModule
   ]
 })
 export class SharedModule { }

@@ -1,0 +1,28 @@
+<div class="card">
+    <div class="card-container" [ngClass]="{'focus': edit}">
+        <div class="question-label">
+            <label *ngIf="!edit">Some Random question?</label>
+            <div class="question-input" *ngIf="edit">
+                <input type="text" placeholder="Enter Question"/>
+                <!-- <span class="img-btn"><i class="pi pi-image"></i></span> -->
+            </div>
+        </div>
+        <!-- <div class="img-container"></div> -->
+        <div class="description">
+            <label *ngIf="!edit">Some description...</label>
+            <textarea *ngIf="edit" rows="3" placeholder="Enter Description"></textarea>
+        </div>
+        <div class="answer-body">
+            <input type="text" placeholder="Enter Answer"/>
+        </div>
+        <div class="validations">
+            some....
+        </div>
+        <div class="controls" *ngIf="edit">
+            <span class="delete-btn"><i class="pi pi-copy"></i>Clone</span>
+            <span class="delete-btn"><i class="pi pi-times-circle"></i>Delete</span>
+            <p-toggleButton [(ngModel)]="checked" [onIcon]="'pi pi-check'" 
+                offIcon="pi pi-times" onLabel="Required" offLabel="Required"></p-toggleButton>
+        </div>
+    </div>
+</div>

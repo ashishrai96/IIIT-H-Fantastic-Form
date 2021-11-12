@@ -1,0 +1,75 @@
+.card {
+    border-left: 4px solid #34808f;
+    border-radius: 10px;
+    overflow: hidden;
+    
+    .card-container {
+        padding: 10px 15px;
+        background-color: #34808f1f;
+
+        .question-label {
+            padding: 5px 0px;
+            font-size: 16px;
+            color: #53565a;
+        }
+
+        .question-input {
+            display: flex;
+            align-items: stretch;
+            
+            .img-btn {
+                display: flex;
+                align-items: center;
+                padding: 5px 10px;
+                background-color: #34808f;
+                color: #efefef;
+                cursor: pointer;
+            }
+            .img-btn:hover {
+                background-color: #2ca5bc;
+            }
+        }
+
+        .description {
+            padding: 5px 5px;
+            color: #888;
+            font-size: 14px;
+        }
+
+        .answer-body {
+            padding: 10px 0px;
+        }
+
+        .validations {
+            padding: 5px 0px;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            padding: 10px 0px;
+            border-top: 1px solid #34808f;
+
+            span.delete-btn {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-right: 10px;
+                color: #53565a;
+                padding: 4px 10px 4px 5px;
+                cursor: pointer;
+                background-color: #fff;
+                border-radius: 4px;
+                border: 1px solid #ccc;
+
+                i{
+                    padding: 5px;
+                }
+            }
+            span.delete-btn:hover {
+                background-color: transparent;
+            }
+        }
+    }
+}

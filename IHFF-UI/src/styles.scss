@@ -1,7 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
 @import 'assets/scss/p-avatar.scss';
+@import 'assets/scss/p-togglebutton.scss';
+@import 'assets/scss/inputs.scss';
 
 body{
     margin: 0;
     font-family: Arial;
+}
+
+*:focus {
+    box-shadow: none !important;
 }
