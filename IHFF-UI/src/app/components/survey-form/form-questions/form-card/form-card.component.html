@@ -1,27 +1,45 @@
-<div class="card">
-    <div class="card-container" [ngClass]="{'focus': edit}">
+<div class="card" [ngClass]="{'edit-mode': value.editMode}">
+    <div class="card-container" [ngClass]="{'focus': value.editMode}">
         <div class="question-label">
-            <label *ngIf="!edit">Some Random question?</label>
-            <div class="question-input" *ngIf="edit">
-                <input type="text" placeholder="Enter Question"/>
-                <!-- <span class="img-btn"><i class="pi pi-image"></i></span> -->
+            <label [ngClass]="{'mandatory': value.required==true}" *ngIf="!value.editMode">{{ value.question }}</label>
+            <div class="question-input" *ngIf="value.editMode">
+                <input type="text" placeholder="Enter Question" [(ngModel)]="value.question" />
             </div>
         </div>
-        <!-- <div class="img-container"></div> -->
         <div class="description">
-            <label *ngIf="!edit">Some description...</label>
-            <textarea *ngIf="edit" rows="3" placeholder="Enter Description"></textarea>
+            <label *ngIf="!value.editMode && value.description?.length>0">{{ value.description }}</label>
+            <textarea *ngIf="value.editMode" rows="3" placeholder="Enter Description" [(ngModel)]="value.description"></textarea>
         </div>
         <div class="answer-body">
-            <input type="text" placeholder="Enter Answer"/>
+            <ng-container>
+                <input type="text" placeholder="Enter Answer" [disabled]="value.editMode" [(ngModel)]="value.answer"/>
+            </ng-container>
         </div>
-        <div class="validations">
-            some....
+        <div class="validations" *ngIf="value.editMode">
+            <ng-container *ngIf="value.validations">
+                <div class="text-validation">
+                    <label>Validation: </label>
+                    <div class="validation-input">
+                        
+                        
+                        <p-dropdown [options]="restrictions" [(ngModel)]="rule" optionLabel="name" 
+                            (onChange)="updateValidationInfo()"></p-dropdown>
+                    
+                    
+                        </div>
+                    <div class="validation-input">
+                        <input type="number" [(ngModel)]="value.validations.value1" />
+                    </div>
+                    <div class="validation-input">
+                        <input type="number" [(ngModel)]="value.validations.value2" />
+                    </div>
+                </div>
+            </ng-container>
         </div>
-        <div class="controls" *ngIf="edit">
-            <span class="delete-btn"><i class="pi pi-copy"></i>Clone</span>
-            <span class="delete-btn"><i class="pi pi-times-circle"></i>Delete</span>
-            <p-toggleButton [(ngModel)]="checked" [onIcon]="'pi pi-check'" 
+        <div class="controls" *ngIf="value.editMode">
+            <span class="delete-btn" (click)="onClone()"><i class="pi pi-copy"></i>Clone</span>
+            <span class="delete-btn" (click)="onDelete()"><i class="pi pi-times-circle"></i>Delete</span>
+            <p-toggleButton [(ngModel)]="value.required" [onIcon]="'pi pi-check'" 
                 offIcon="pi pi-times" onLabel="Required" offLabel="Required"></p-toggleButton>
         </div>
     </div>

@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {AvatarModule} from 'primeng/avatar';
 import {ToggleButtonModule} from 'primeng/togglebutton';
-
+import {DropdownModule} from 'primeng/dropdown';
 
 @NgModule({
   declarations: [
@@ -10,11 +10,13 @@ import {ToggleButtonModule} from 'primeng/togglebutton';
   imports: [
     CommonModule,
     AvatarModule,
-    ToggleButtonModule
+    ToggleButtonModule,
+    DropdownModule
   ],
   exports: [
     AvatarModule,
-    ToggleButtonModule
+    ToggleButtonModule,
+    DropdownModule
   ]
 })
 export class SharedModule { }

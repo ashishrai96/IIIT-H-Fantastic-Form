@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormElement } from 'src/app/shared/form-element.model';
 
 @Component({
   selector: 'app-form-questions',
@@ -7,9 +8,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FormQuestionsComponent implements OnInit {
 
+  formArray: FormElement[] = [];
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  AddNewElement(){
+    let elem: FormElement = {
+      question: '',
+      description: '',
+      answer: '',
+      required: false,
+      validations: { rule: '', value1: '', value2: '' },
+      editMode: true
+    };
+    console.log(elem);
+    this.formArray.push(elem);
+  }
 }

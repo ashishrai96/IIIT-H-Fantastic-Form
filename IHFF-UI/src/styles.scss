@@ -1,7 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
+@import 'assets/scss/inputs.scss';
+@import 'assets/scss/button.scss';
 @import 'assets/scss/p-avatar.scss';
 @import 'assets/scss/p-togglebutton.scss';
-@import 'assets/scss/inputs.scss';
+@import 'assets/scss/p-dropdown.scss';
 
 body{
     margin: 0;

@@ -1,9 +1,15 @@
 input[type="text"],
+input[type="number"],
 textarea {
     width: 100%;
     padding: 5px 10px;
     border-radius: 0px;
     border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+input {
+    height: 34px;
 }
 
 textarea{
@@ -11,6 +17,7 @@ textarea{
 }
 
 input[type="text"]:focus-visible,
+input[type="number"]:focus-visible,
 textarea:focus-visible {
     outline: none;
     border: 1px solid #34808f;

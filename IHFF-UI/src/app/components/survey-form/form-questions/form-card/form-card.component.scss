@@ -1,16 +1,28 @@
 .card {
-    border-left: 4px solid #34808f;
-    border-radius: 10px;
-    overflow: hidden;
-    
+
+    &.edit-mode {
+        border-left: 4px solid #34808f;
+        border-radius: 10px;
+    }
+
     .card-container {
         padding: 10px 15px;
         background-color: #34808f1f;
+        border-radius: 10px;
 
         .question-label {
             padding: 5px 0px;
             font-size: 16px;
             color: #53565a;
+
+            .mandatory::after {
+                content: '*';
+                font-size: 20px;
+                vertical-align: middle;
+                margin: 0px 5px;
+                color: #e54343;
+                font-family: 'primeicons';
+            }
         }
 
         .question-input {
@@ -42,6 +54,21 @@
 
         .validations {
             padding: 5px 0px;
+
+            .text-validation {
+                display: flex;
+                align-items: center;
+
+                .validation-input {
+                    padding: 0px 15px;
+                    flex: 1;
+
+                    input {
+                        height: 34px;
+                        border-radius: 3px;
+                    }
+                }
+            }
         }
 
         .controls {
