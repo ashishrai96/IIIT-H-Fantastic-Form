@@ -10,6 +10,8 @@ import { FormQuestionsComponent } from './components/survey-form/form-questions/
 import { FormResponsesComponent } from './components/survey-form/form-responses/form-responses.component';
 import { FormCardComponent } from './components/survey-form/form-questions/form-card/form-card.component';
 import { FormsModule } from '@angular/forms';
+import { LoginComponent } from './components/login/login.component';
+import { SignupComponent } from './components/signup/signup.component';
 
 
 @NgModule({
@@ -20,6 +22,8 @@ import { FormsModule } from '@angular/forms';
     FormQuestionsComponent,
     FormResponsesComponent,
     FormCardComponent,
+    LoginComponent,
+    SignupComponent,
   ],
   imports: [
     BrowserModule,

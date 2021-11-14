@@ -1,0 +1,16 @@
+<div class="login-form">
+    <h3 class="heading">Login</h3>
+    <form action="#" method="#" (ngSubmit)="login()">
+        <div class="form-group">
+            <input type="email" class="in" [ngClass]="{'error-input': variable==false}" placeholder="Email *" name="email" [(ngModel)]="email" required/>
+
+        </div>
+        <div class="form-group">
+            <input type="password" class="in" placeholder="Password *" name="password" [(ngModel)]="password" required/>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="login"/>
+        </div>
+     
+    </form>
+</div>
