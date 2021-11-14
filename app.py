@@ -2,8 +2,6 @@ from flask import Flask
 from flask_restful import Api
 
 from resources.user import UserRegister
-#from resources.item import Item, ItemList
-#from resources.store import Store, StoreList
 from resources.form import Form
 from resources.question import QuestionList, Question
 
@@ -21,11 +19,6 @@ api = Api(app)
 def create_tables():
     db.create_all()
 
-
-#api.add_resource(Store, '/store/<string:name>')
-#api.add_resource(StoreList, '/stores')
-#api.add_resource(Item, '/item/<string:name>')
-#api.add_resource(ItemList, '/items')
 api.add_resource(UserRegister, '/register')
 api.add_resource(Form, '/form')
 api.add_resource(QuestionList, '/questionlist/<int:id>')
