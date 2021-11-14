@@ -6,8 +6,8 @@ class FormModel(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     url = db.Column(db.String(500))
 
-    creator_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    questions = db.relationship('QuestionModel',cascade="all,delete-orphan" , backref = 'parentform')
+    creator_id = db.Column(db.Integer, db.ForeignKey('users.id',ondelete="CASCADE"))
+    questions = db.relationship('QuestionModel',cascade="all,delete" , backref = 'parentform')
  
     def __init__(self, url, creator_id):
         self.url = url

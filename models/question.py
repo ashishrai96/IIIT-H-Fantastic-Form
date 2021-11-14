@@ -6,7 +6,7 @@ class QuestionModel(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     description = db.Column(db.String(500))
     type = db.Column(db.String(50))
-    form_id = db.Column(db.Integer, db.ForeignKey('form.id'))
+    form_id = db.Column(db.Integer, db.ForeignKey('form.id',ondelete="CASCADE"))
  
     def __init__(self, description, type, form_id):
         self.description = description

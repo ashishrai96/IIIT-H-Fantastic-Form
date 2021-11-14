@@ -7,7 +7,7 @@ class UserModel(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80))
     password = db.Column(db.String(80))
-    forms = db.relationship('FormModel',cascade="all,delete-orphan", backref = 'creator')
+    forms = db.relationship('FormModel',cascade="all,delete", backref ='creator')
 
     def __init__(self, username, password):
         self.username = username
