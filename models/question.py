@@ -7,7 +7,9 @@ class QuestionModel(db.Model):
     description = db.Column(db.String(500))
     type = db.Column(db.String(50))
     form_id = db.Column(db.Integer, db.ForeignKey('form.id',ondelete="CASCADE"))
- 
+    options=db.relationship('OptionModel',cascade="all,delete" , backref = 'ques_detail')
+    response=db.relationship('ResponseModel',cascade="all,delete" , backref ='ques_detail')
+
     def __init__(self, description, type, form_id):
         self.description = description
         self.type = type

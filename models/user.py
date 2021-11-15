@@ -8,6 +8,7 @@ class UserModel(db.Model):
     username = db.Column(db.String(80))
     password = db.Column(db.String(80))
     forms = db.relationship('FormModel',cascade="all,delete", backref ='creator')
+    response=db.relationship('ResponseModel',cascade="all,delete" , backref ='person')
 
     def __init__(self, username, password):
         self.username = username
