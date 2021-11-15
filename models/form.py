@@ -4,9 +4,9 @@ class FormModel(db.Model):
     __tablename__ = 'form'
 
     id = db.Column(db.Integer, primary_key=True)
-    url = db.Column(db.String(500))
-
-    creator_id = db.Column(db.Integer, db.ForeignKey('users.id',ondelete="CASCADE"))
+    url = db.Column(db.String(500), nullable=False)
+    title=db.Column(db.String(80), nullable=False)
+    creator_id = db.Column(db.Integer, db.ForeignKey('users.id',ondelete="CASCADE"), nullable=False)
     questions = db.relationship('QuestionModel',cascade="all,delete" , backref = 'parentform')
     response=db.relationship('ResponseModel',cascade="all,delete" , backref ='parent_form')
 

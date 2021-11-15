@@ -4,9 +4,9 @@ class QuestionModel(db.Model):
     __tablename__ = 'question'
 
     id = db.Column(db.Integer, primary_key=True)
-    description = db.Column(db.String(500))
-    type = db.Column(db.String(50))
-    form_id = db.Column(db.Integer, db.ForeignKey('form.id',ondelete="CASCADE"))
+    description = db.Column(db.String(500), nullable=False)
+    type = db.Column(db.String(50), nullable=False)
+    form_id = db.Column(db.Integer, db.ForeignKey('form.id',ondelete="CASCADE"), nullable=False)
     options=db.relationship('OptionModel',cascade="all,delete" , backref = 'ques_detail')
     response=db.relationship('ResponseModel',cascade="all,delete" , backref ='ques_detail')
 
