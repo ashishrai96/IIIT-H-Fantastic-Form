@@ -10,22 +10,29 @@ import { FormElement } from 'src/app/shared/models/form-element.model';
 export class FormQuestionsComponent implements OnInit {
 
   formArray: FormElement[] = [];
+  formTitle: string = '';
+
   constants = Constants;
+  allowEdit: boolean = true;
 
   constructor() { }
 
   ngOnInit(): void {
+    // setTimeout(() => {
+    //   this.allowEdit = false;
+    // }, 10000);
   }
 
   AddNewElement(type: number){
     let elem: FormElement = {
+      formId: null,
       questionId: null,
       type: type,
       question: '',
       description: '',
       answer: '',
       required: false,
-      editMode: true
+      // editMode: true
     };
 
     if(type == this.constants.FORM_ELEM_TEXT_OPTION){
@@ -53,7 +60,7 @@ export class FormQuestionsComponent implements OnInit {
     setTimeout(() => {
       this.formArray[index].editMode = false;
     }, 0);
-    
+
     this.formArray = [ ...this.formArray.slice(0, index+1), elem, ...this.formArray.slice(index+1) ];
     console.log(this.formArray);
   }

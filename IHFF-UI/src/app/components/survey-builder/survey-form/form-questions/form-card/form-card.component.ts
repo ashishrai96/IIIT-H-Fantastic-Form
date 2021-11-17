@@ -11,6 +11,7 @@ export class FormCardComponent implements OnInit {
 
   @Input() value: FormElement;
   @Input() index: number;
+  @Input() allowEdit: boolean = true;
   @Output() onClone: EventEmitter<any> = new EventEmitter<any>();
   @Output() onDelete: EventEmitter<any> = new EventEmitter<any>();
   
@@ -26,6 +27,10 @@ export class FormCardComponent implements OnInit {
 
   @HostListener('click')
   insideClicked(): void {
+    if(!this.allowEdit){
+      return;
+    }
+
     this.value.editMode = true;
     this.isInsideClicked = true;
     console.log("In");
@@ -33,6 +38,10 @@ export class FormCardComponent implements OnInit {
 
   @HostListener('document:click')
   outsideClicked(): void {
+    if(!this.allowEdit){
+      return;
+    }
+
     if(!this.isInsideClicked && this.firstClickDone){
       this.value.editMode = false;
       console.log("Out");
@@ -52,6 +61,9 @@ export class FormCardComponent implements OnInit {
     ];
     this.rule = this.restrictions[0];
 
+    if(this.allowEdit){
+      this.value.editMode = true;
+    }
   }
 
   updateValidationInfo(){
