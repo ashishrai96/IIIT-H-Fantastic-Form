@@ -1,5 +1,6 @@
-import { Component, HostListener, Input, OnInit } from '@angular/core';
-import { FormElement } from 'src/app/shared/form-element.model';
+import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
+import { Constants } from 'src/app/shared/models/constants.model';
+import { FormElement } from 'src/app/shared/models/form-element.model';
 
 @Component({
   selector: 'app-form-card',
@@ -9,8 +10,12 @@ import { FormElement } from 'src/app/shared/form-element.model';
 export class FormCardComponent implements OnInit {
 
   @Input() value: FormElement;
+  @Input() index: number;
+  @Output() onClone: EventEmitter<any> = new EventEmitter<any>();
+  @Output() onDelete: EventEmitter<any> = new EventEmitter<any>();
   
-  checked: boolean = false;
+  dummy = false;
+  constants = Constants;
   isInsideClicked: boolean = false;
   firstClickDone: boolean = false;
 
@@ -54,12 +59,30 @@ export class FormCardComponent implements OnInit {
     console.log("riledmcsdvbv",this.rule);
   }
   
-  onClone() {
-
+  onCloneHandler() {
+    this.onClone.emit();
   }
 
-  onDelete() {
-
+  onDeleteHandler() {
+    this.onDelete.emit();
   }
+
+  onAddNewChoice() {
+    this.value.choices = [ ...this.value.choices, '' ];
+  }
+
+  onDeleteChoice(index: number){
+    if(this.value.choices.length < 2){
+      return;
+    }
+    
+    this.value.choices.splice(index,1);
+  }
+
+  check() {
+    console.log(this.value);
+  }
+
+  choiceTrackBy = (index, item) => index;
 
 }

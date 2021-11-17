@@ -1,7 +1,17 @@
 <p>form-questions works!</p>
 <div class="form-container">
-    <div class="form-control" *ngFor="let val of formArray">
-        <app-form-card [value]="val"></app-form-card>
+    <div class="form-control" *ngFor="let val of formArray;let index=index">
+        <app-form-card [value]="val" [index]="index" (onDelete)="onDelete(index)" (onClone)="onClone(index)"></app-form-card>
     </div>
 </div>
-<button class="btn primary" (click)="AddNewElement()">Add</button>
+<div class="btn-group">
+    <button class="btn primary" (click)="AddNewElement(constants.FORM_ELEM_CHOICE_OPTION)">
+        <i class="pi pi-plus"></i>Choice
+    </button>
+    <button class="btn primary" (click)="AddNewElement(constants.FORM_ELEM_TEXT_OPTION)">
+        <i class="pi pi-plus"></i>Text
+    </button>
+    <button class="btn primary" (click)="AddNewElement(constants.FORM_ELEM_LIKER_SCALE_OPTION)">
+        <i class="pi pi-plus"></i>Liker Scale
+    </button>
+</div>

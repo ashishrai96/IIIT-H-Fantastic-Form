@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -11,6 +12,7 @@ import { FormQuestionsComponent } from './components/survey-form/form-questions/
 import { FormResponsesComponent } from './components/survey-form/form-responses/form-responses.component';
 import { FormCardComponent } from './components/survey-form/form-questions/form-card/form-card.component';
 import { FormsModule } from '@angular/forms';
+import { FormLikertScaleComponent } from './components/survey-form/form-questions/form-card/form-likert-scale/form-likert-scale.component';
 
 @NgModule({
   declarations: [
@@ -20,13 +22,15 @@ import { FormsModule } from '@angular/forms';
     FormQuestionsComponent,
     FormResponsesComponent,
     FormCardComponent,
+    FormLikertScaleComponent,
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     SharedModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

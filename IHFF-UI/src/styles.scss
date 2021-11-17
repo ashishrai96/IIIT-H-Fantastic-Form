@@ -4,6 +4,9 @@
 @import 'assets/scss/p-avatar.scss';
 @import 'assets/scss/p-togglebutton.scss';
 @import 'assets/scss/p-dropdown.scss';
+@import 'assets/scss/p-inputswitch.scss';
+@import 'assets/scss/p-radio-check.scss';
+@import 'assets/scss/p-orderlist.scss';
 
 body{
     margin: 0;
@@ -11,5 +14,9 @@ body{
 }
 
 *:focus {
+    box-shadow: none !important;
+}
+
+*.p-focus {
     box-shadow: none !important;
 }

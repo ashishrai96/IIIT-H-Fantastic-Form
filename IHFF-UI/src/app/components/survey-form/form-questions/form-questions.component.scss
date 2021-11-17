@@ -7,7 +7,17 @@
 
     .form-control {
         padding: 10px 15px;
+    }
+}
 
-        
+.btn-group {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    i {
+        margin: 0px 5px;
+        font-size: 12px;
+        font-weight: 700;
     }
 }
