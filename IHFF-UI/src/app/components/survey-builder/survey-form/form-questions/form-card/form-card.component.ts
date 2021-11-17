@@ -1,4 +1,4 @@
-import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, HostListener, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { Constants } from 'src/app/shared/models/constants.model';
 import { FormElement } from 'src/app/shared/models/form-element.model';
 
@@ -7,7 +7,7 @@ import { FormElement } from 'src/app/shared/models/form-element.model';
   templateUrl: './form-card.component.html',
   styleUrls: ['./form-card.component.scss']
 })
-export class FormCardComponent implements OnInit {
+export class FormCardComponent implements OnInit, OnChanges {
 
   @Input() value: FormElement;
   @Input() index: number;
@@ -25,29 +25,34 @@ export class FormCardComponent implements OnInit {
 
   constructor() { }
 
-  @HostListener('click')
-  insideClicked(): void {
-    if(!this.allowEdit){
-      return;
-    }
+  // @HostListener('click')
+  // insideClicked(): void {
+  //   if(!this.allowEdit){
+  //     return;
+  //   }
 
-    this.value.editMode = true;
-    this.isInsideClicked = true;
-    console.log("In");
-  }
+  //   this.value.editMode = true;
+  //   this.isInsideClicked = true;
+  //   console.log("In");
+  // }
 
-  @HostListener('document:click')
-  outsideClicked(): void {
-    if(!this.allowEdit){
-      return;
-    }
+  // @HostListener('document:click')
+  // outsideClicked(): void {
+  //   if(!this.allowEdit){
+  //     return;
+  //   }
 
-    if(!this.isInsideClicked && this.firstClickDone){
-      this.value.editMode = false;
-      console.log("Out");
-    }
-    this.isInsideClicked = false;
-    this.firstClickDone = true;
+  //   if(!this.isInsideClicked && this.firstClickDone){
+  //     this.value.editMode = false;
+  //     console.log("Out");
+  //   }
+  //   this.isInsideClicked = false;
+  //   this.firstClickDone = true;
+  // }
+
+  ngOnChanges() {
+    console.log("hello")
+    this.value.editMode = this.allowEdit;
   }
 
   ngOnInit(): void {
@@ -61,9 +66,10 @@ export class FormCardComponent implements OnInit {
     ];
     this.rule = this.restrictions[0];
 
-    if(this.allowEdit){
-      this.value.editMode = true;
-    }
+  }
+
+  onLikertAnswerUpdate(event){
+    this.value.answer = [ ...event ];
   }
 
   updateValidationInfo(){

@@ -15,7 +15,7 @@ const routes: Routes = [
           path: 'form', component: SurveyFormComponent,
           children: [
             { path: 'questions', component: FormQuestionsComponent },
-            { path: 'responses', component: FormResponsesComponent },
+            { path: 'responses/:formId', component: FormResponsesComponent },
             { path: '', pathMatch: 'full', redirectTo: 'questions' }
           ]
         },

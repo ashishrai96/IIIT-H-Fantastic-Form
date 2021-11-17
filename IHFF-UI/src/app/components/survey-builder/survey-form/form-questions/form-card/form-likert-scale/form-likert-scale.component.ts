@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnChanges, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-form-likert-scale',
@@ -10,6 +10,7 @@ export class FormLikertScaleComponent implements OnInit {
   @Input() statements: string[] = [];
   @Input() choices: string[] = [];
   @Input() editMode: boolean = false;
+  @Output() onAnswer = new EventEmitter<string[]>();
 
   answer: string[] = [];
 
@@ -21,6 +22,7 @@ export class FormLikertScaleComponent implements OnInit {
 
   onAnswerChange() {
     console.log(this.answer);
+    this.onAnswer.emit(this.answer);
   }
 
   addChoices() {

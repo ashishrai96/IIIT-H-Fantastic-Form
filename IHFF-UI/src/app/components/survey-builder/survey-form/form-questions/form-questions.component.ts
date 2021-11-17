@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Constants } from 'src/app/shared/models/constants.model';
 import { FormElement } from 'src/app/shared/models/form-element.model';
+import { SurveyBuilderDataExchangeService } from '../../survey-builder-data-exchange.service';
 
 @Component({
   selector: 'app-form-questions',
@@ -14,25 +15,31 @@ export class FormQuestionsComponent implements OnInit {
 
   constants = Constants;
   allowEdit: boolean = true;
+  preview: boolean = false;
+  private isLive: boolean = false;
 
-  constructor() { }
+  constructor(private surveyDataExchnage: SurveyBuilderDataExchangeService) { }
 
   ngOnInit(): void {
-    // setTimeout(() => {
-    //   this.allowEdit = false;
-    // }, 10000);
+    this.surveyDataExchnage.getPreview().subscribe((preview:boolean) => {
+      this.allowEdit = !preview;
+      this.preview = preview;
+      this.formArray = [ ...this.formArray ];
+    });
+    
+    this.surveyDataExchnage.listenPublishEvent().subscribe(() => {
+      this.publishForm();
+    });
   }
 
   AddNewElement(type: number){
     let elem: FormElement = {
-      formId: null,
       questionId: null,
       type: type,
       question: '',
       description: '',
       answer: '',
       required: false,
-      // editMode: true
     };
 
     if(type == this.constants.FORM_ELEM_TEXT_OPTION){
@@ -57,11 +64,22 @@ export class FormQuestionsComponent implements OnInit {
 
   onClone(index: number) {
     let elem = { ...this.formArray[index] };
-    setTimeout(() => {
-      this.formArray[index].editMode = false;
-    }, 0);
+    // setTimeout(() => {
+    //   this.formArray[index].editMode = false;
+    // }, 0);
 
     this.formArray = [ ...this.formArray.slice(0, index+1), elem, ...this.formArray.slice(index+1) ];
     console.log(this.formArray);
   }
+
+  publishForm(){
+    let form = {
+      "title": this.formTitle,
+      "formId": null,
+      "items": this.formArray
+    };
+
+    console.log(JSON.stringify(form));
+  }
+
 }

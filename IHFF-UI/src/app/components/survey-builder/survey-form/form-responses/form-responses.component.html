@@ -1,1 +1,6 @@
 <p>form-responses works!</p>
+<div class="form-container">
+    <div class="form-control" *ngFor="let val of formArray;let index=index">
+        <app-form-card [value]="val" [index]="index" [allowEdit]="allowEdit" (onDelete)="onDelete(index)" (onClone)="onClone(index)"></app-form-card>
+    </div>
+</div>

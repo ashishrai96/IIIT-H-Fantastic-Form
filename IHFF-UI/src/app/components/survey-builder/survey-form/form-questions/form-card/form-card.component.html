@@ -69,11 +69,14 @@
                 <button class="btn primary" *ngIf="value.editMode" (click)="onAddNewChoice()">Add Choice</button>
             </ng-container>
             <ng-container *ngIf="value.type == constants.FORM_ELEM_LIKER_SCALE_OPTION">
-                <app-form-likert-scale [editMode]="value.editMode" [statements]="value.statements" [choices]="value.choices"></app-form-likert-scale>
+                <app-form-likert-scale [editMode]="value.editMode" [statements]="value.statements" [choices]="value.choices" (onAnswer)="onLikertAnswerUpdate($event)"></app-form-likert-scale>
             </ng-container>
         </div>
-        <div class="validations" *ngIf="value.editMode && !(value.type == constants.FORM_ELEM_LIKER_SCALE_OPTION)">
-            <ng-container *ngIf="value.validations && value.type == constants.FORM_ELEM_TEXT_OPTION">
+        <div class="validations" 
+            *ngIf="value.editMode 
+                && !(value.type == constants.FORM_ELEM_LIKER_SCALE_OPTION)
+                && !(value.type == constants.FORM_ELEM_TEXT_OPTION)">
+            <!-- <ng-container *ngIf="value.validations && value.type == constants.FORM_ELEM_TEXT_OPTION">
                 <div class="text-validation">
                     <label>Validation: </label>
                     <div class="validation-input">
@@ -87,7 +90,7 @@
                         <input type="number" [(ngModel)]="value.validations.value2" />
                     </div>
                 </div>
-            </ng-container>
+            </ng-container> -->
             <ng-container *ngIf="value.type == constants.FORM_ELEM_CHOICE_OPTION">
                 <label>Rule: </label>
                 <label>Single Choice</label>
