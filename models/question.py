@@ -12,11 +12,12 @@ class QuestionModel(db.Model):
     options=db.relationship('OptionModel',cascade="all,delete" , backref = 'ques_detail')
     response=db.relationship('ResponseModel',cascade="all,delete" , backref ='ques_detail')
 
-    def __init__(self,question, description, qtype, required):
+    def __init__(self,question, description, qtype, required,form_id):
         self.question=question
         self.description = description
         self.question_type = qtype
         self.required= required
+        self.form_id = form_id
 
     def json(self):
         return {'description': self.description, 'type' : self.type, 'form_id': self.form_id}
