@@ -2,7 +2,7 @@ from flask import Flask
 from flask_restful import Api
 
 from resources.user import UserRegister
-from resources.form import Form
+from resources.form import AddForm
 from resources.question import QuestionList, Question
 from models.option import OptionModel
 from models.response import ResponseModel
@@ -22,9 +22,10 @@ def create_tables():
     db.create_all()
 
 api.add_resource(UserRegister, '/register')
-api.add_resource(Form, '/form')
+api.add_resource(AddForm, '/addform')
 api.add_resource(QuestionList, '/questionlist/<int:id>')
 api.add_resource(Question, '/question')
+#api.add_resource(Form,'/forms/<int:_id>/<string:title>')
 
 if __name__ == '__main__':
     from db import db
