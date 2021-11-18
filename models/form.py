@@ -11,9 +11,8 @@ class FormModel(db.Model):
     response=db.relationship('ResponseModel',cascade="all,delete" , backref ='parent_form')
 
  
-    def __init__(self, url, creator_id, title):
+    def __init__(self, url, title):
         self.url = url
-        self.creator_id = creator_id
         self.title=title
 
     def json(self):
