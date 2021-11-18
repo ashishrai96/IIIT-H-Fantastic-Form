@@ -6,16 +6,16 @@ class QuestionModel(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     question = db.Column(db.String(500),nullable=False)
     description = db.Column(db.String(500))
-    type = db.Column(db.Integer, nullable=False)
+    question_type = db.Column(db.Integer, nullable=False)
     required=db.Column(db.Boolean,nullable=False)
     form_id = db.Column(db.Integer, db.ForeignKey('form.id',ondelete="CASCADE"), nullable=False)
     options=db.relationship('OptionModel',cascade="all,delete" , backref = 'ques_detail')
     response=db.relationship('ResponseModel',cascade="all,delete" , backref ='ques_detail')
 
-    def __init__(self,question, description, type, required):
+    def __init__(self,question, description, qtype, required):
         self.question=question
         self.description = description
-        self.type = type
+        self.question_type = qtype
         self.required= required
 
     def json(self):
