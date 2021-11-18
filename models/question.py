@@ -6,7 +6,7 @@ class QuestionModel(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     question = db.Column(db.String(500),nullable=False)
     description = db.Column(db.String(500))
-    type = db.Column(db.String(50), nullable=False)
+    type = db.Column(db.Integer, nullable=False)
     required=db.Column(db.Boolean,nullable=False)
     form_id = db.Column(db.Integer, db.ForeignKey('form.id',ondelete="CASCADE"), nullable=False)
     options=db.relationship('OptionModel',cascade="all,delete" , backref = 'ques_detail')
