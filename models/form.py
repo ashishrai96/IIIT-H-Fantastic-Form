@@ -5,15 +5,16 @@ class FormModel(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     url = db.Column(db.String(500), nullable=False)
-    title=db.Column(db.String(80), nullable=False)
+    title=db.Column(db.String(80),nullable=False)
     creator_id = db.Column(db.Integer, db.ForeignKey('users.id',ondelete="CASCADE"), nullable=False)
     questions = db.relationship('QuestionModel',cascade="all,delete" , backref = 'parentform')
     response=db.relationship('ResponseModel',cascade="all,delete" , backref ='parent_form')
 
  
-    def __init__(self, url, creator_id):
+    def __init__(self, url, creator_id, title):
         self.url = url
         self.creator_id = creator_id
+        self.title=title
 
     def json(self):
         return {'url': self.url, 'creator_id': self.creator_id}
