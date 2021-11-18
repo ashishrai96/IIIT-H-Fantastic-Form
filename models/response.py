@@ -13,6 +13,10 @@ class ResponseModel(db.Model):
         self.user_id = user_id
         self.ques_id= ques_id
         self.response= response
+    
+    def save_to_db(self):
+        db.session.add(self)
+        db.session.commit()
 
     @classmethod
     def resp_user(cls, u_id, f_id):

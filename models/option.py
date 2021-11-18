@@ -10,3 +10,7 @@ class OptionModel(db.Model):
     def __init__(self,ques_id,description):
         self.ques_id = ques_id
         self.description= description
+    
+    def save_to_db(self):
+        db.session.add(self)
+        db.session.commit()
