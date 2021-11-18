@@ -14,6 +14,7 @@ import { FormCardComponent } from './components/survey-builder/survey-form/form-
 import { FormsModule } from '@angular/forms';
 import { FormLikertScaleComponent } from './components/survey-builder/survey-form/form-questions/form-card/form-likert-scale/form-likert-scale.component';
 import { SurveyBuilderComponent } from './components/survey-builder/survey-builder.component';
+import { FormResponseCardComponent } from './components/survey-builder/survey-form/form-responses/form-response-card/form-response-card.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { SurveyBuilderComponent } from './components/survey-builder/survey-build
     FormCardComponent,
     FormLikertScaleComponent,
     SurveyBuilderComponent,
+    FormResponseCardComponent,
   ],
   imports: [
     BrowserModule,

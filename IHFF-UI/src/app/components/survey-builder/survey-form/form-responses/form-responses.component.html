@@ -1,6 +1,10 @@
-<p>form-responses works!</p>
-<div class="form-container">
-    <div class="form-control" *ngFor="let val of formArray;let index=index">
-        <app-form-card [value]="val" [index]="index" [allowEdit]="allowEdit" (onDelete)="onDelete(index)" (onClone)="onClone(index)"></app-form-card>
+<div class="form-title">
+    <h1>{{ formTitle }}</h1>
+</div>
+<div class="form-container" *ngIf="formArray.length">
+    <div class="form-control" *ngFor="let val of questionArray;let index=index">
+        <app-form-response-card [graphData]="graph[index]?graph[index]:''" [value]="val" 
+            [index]="index"></app-form-response-card>
     </div>
 </div>
+<app-form-response-card></app-form-response-card>

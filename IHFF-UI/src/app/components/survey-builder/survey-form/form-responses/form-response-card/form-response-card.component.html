@@ -1,0 +1,32 @@
+<div class="card">
+    <div class="card-container" *ngIf="value">
+        <div class="question-label">
+            <label [ngClass]="{'mandatory': value.required}">
+                <div class="question-number">{{ index+1 }}.</div>
+                {{ value?.question }}
+            </label>
+        </div>
+        <div class="response-body">
+            <ng-container *ngIf="value?.type == constants.FORM_ELEM_CHOICE_OPTION">
+                <div class="graph-container pie">
+                    <p-chart type="pie" [data]="pieData" [options]="pieOptions" [style]="{'width': '40%'}"></p-chart>
+                </div>
+            </ng-container>
+            <ng-container *ngIf="value.type == constants.FORM_ELEM_TEXT_OPTION">
+                
+            </ng-container>
+            <ng-container *ngIf="value.type == constants.FORM_ELEM_LIKER_SCALE_OPTION">
+                <div class="graph-container stack">
+                    <p-chart type="bar" [data]="stackedData" [options]="stackedOptions"></p-chart>
+                </div>
+            </ng-container>
+            <ng-container *ngIf="value.type == constants.FORM_ELEM_TEXT_OPTION">
+                <div class="text-group">
+                    <div class="text-answer" *ngFor="let ans of graphData">
+                        {{ ans }}
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+</div>

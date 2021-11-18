@@ -7,6 +7,7 @@ import {RadioButtonModule} from 'primeng/radiobutton';
 import {CheckboxModule} from 'primeng/checkbox';
 import {InputSwitchModule} from 'primeng/inputswitch';
 import {OrderListModule} from 'primeng/orderlist';
+import {ChartModule} from 'primeng/chart';
 
 
 
@@ -21,7 +22,8 @@ import {OrderListModule} from 'primeng/orderlist';
     RadioButtonModule,
     CheckboxModule,
     InputSwitchModule,
-    OrderListModule
+    OrderListModule,
+    ChartModule
   ],
   exports: [
     AvatarModule,
@@ -30,7 +32,8 @@ import {OrderListModule} from 'primeng/orderlist';
     RadioButtonModule,
     CheckboxModule,
     InputSwitchModule,
-    OrderListModule
+    OrderListModule,
+    ChartModule
   ]
 })
 export class SharedModule { }
