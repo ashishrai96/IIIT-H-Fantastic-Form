@@ -4,6 +4,8 @@ from flask_restful import Api
 from resources.user import UserRegister
 from resources.form import Form
 from resources.question import QuestionList, Question
+from models.option import OptionModel
+from models.response import ResponseModel
 
 app = Flask(__name__)
 

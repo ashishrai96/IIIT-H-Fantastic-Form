@@ -1,5 +1,4 @@
 from flask_restful import Resource, reqparse
-from flask_jwt import jwt_required
 from models.form import FormModel
 
 
@@ -18,7 +17,7 @@ class Form(Resource):
 
     def post(self):
         data = Form.parser.parse_args()
-        print(data['url'])
+        
         form = FormModel(data['url'],data['creator_id'])
         try:
             form.save_to_db()
