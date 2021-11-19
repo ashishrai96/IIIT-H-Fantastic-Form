@@ -4,13 +4,21 @@ p-radiobutton{
     .p-radiobutton-label {
         color: #53565a;
         font-family: Arial;
+
+        &.p-disabled {
+            opacity: 1 !important;
+        }
     }
     .p-radiobutton {
 
         .p-radiobutton-box {
+            &.p-disabled {
+                opacity: 1 !important;
+            }
+
             &.p-highlight {
-            background-color: #fff !important;
-            border-color: #34808f !important;
+                background-color: #fff !important;
+                border-color: #34808f !important;
             }
 
             .p-radiobutton-icon {
@@ -19,6 +27,22 @@ p-radiobutton{
 
             &:not(.p-disabled):not(.p-highlight):hover {
                 border-color: #34808f !important;
+            }
+        }
+    }
+}
+
+p-radiobutton.readonly {
+
+    .p-radiobutton-label {
+        &.p-disabled {
+            opacity: 1 !important;
+        }
+    }
+    .p-radiobutton {
+        .p-radiobutton-box {
+            &.p-disabled {
+                opacity: 1 !important;
             }
         }
     }

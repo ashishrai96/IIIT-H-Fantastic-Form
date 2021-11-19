@@ -8,11 +8,12 @@ import {CheckboxModule} from 'primeng/checkbox';
 import {InputSwitchModule} from 'primeng/inputswitch';
 import {OrderListModule} from 'primeng/orderlist';
 import {ChartModule} from 'primeng/chart';
-
+import { LoaderComponent } from './components/loader/loader.component';
 
 
 @NgModule({
   declarations: [
+    LoaderComponent
   ],
   imports: [
     CommonModule,
@@ -33,7 +34,8 @@ import {ChartModule} from 'primeng/chart';
     CheckboxModule,
     InputSwitchModule,
     OrderListModule,
-    ChartModule
+    ChartModule,
+    LoaderComponent
   ]
 })
 export class SharedModule { }
