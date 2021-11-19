@@ -1,6 +1,7 @@
 from flask_restful import Resource, reqparse
 from flask import make_response
 from models.user import UserModel
+from models.form import FormModel
 from werkzeug.security import safe_str_cmp
 from flask_jwt_extended import set_access_cookies, create_access_token, jwt_required, unset_jwt_cookies, get_jwt_identity
 
@@ -50,7 +51,10 @@ class UserLogin(Resource):
         data = UserLogin.parser.parse_args()
         user = UserModel.query.filter_by(username = data['username']).first()
         if user and safe_str_cmp(data['password'], user.password):
-            response = make_response({"message": "login successful."})
+            formPayload = [{x.title: x.url} for x in FormModel.query.filter_by(creator_id = user.id)]
+            print(formPayload)
+            response = make_response({"message": "login successful.",
+                                       "forms" : formPayload })
             access_token = create_access_token(identity=user.id)
             set_access_cookies(response, access_token)
             return response

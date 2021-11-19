@@ -30,10 +30,7 @@ def create_tables():
 api.add_resource(UserRegister, '/register')
 api.add_resource(UserLogin, '/login')
 api.add_resource(UserLogout, '/logout')
-api.add_resource(Test, '/test')
 api.add_resource(AddForm, '/addform')
-api.add_resource(QuestionList, '/questionlist/<int:id>')
-api.add_resource(Question, '/question')
 api.add_resource(AddResponse,'/form/<int:_id>/<string:_title>')
 
 

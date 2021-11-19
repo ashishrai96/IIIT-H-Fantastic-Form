@@ -45,3 +45,9 @@ class AddResponse(Resource):
             resObj = ResponseModel(form.id, user.id, quesObj.id, answer)
             resObj.save_to_db()
         return {"message" : "Response added."}
+
+
+class GetResponse(Resource):
+    @jwt_required()
+    def get():
+        return {"message" : "Api under construction"}
