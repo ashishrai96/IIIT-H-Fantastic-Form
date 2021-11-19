@@ -1,8 +1,39 @@
 from flask_restful import Resource, reqparse
+from flask import make_response
 from models.user import UserModel
+from werkzeug.security import safe_str_cmp
+from flask_jwt_extended import set_access_cookies, create_access_token, jwt_required, unset_jwt_cookies, get_jwt_identity
 
 
 class UserRegister(Resource):
+    parser = reqparse.RequestParser()
+    parser.add_argument('username',
+                        type=str,
+                        required=True,
+                        help="Username cannot be blank."
+                        )
+    parser.add_argument('password',
+                        type=str,
+                        required=True,
+                        help="Password cannot be blank."
+                        )
+
+    def post(self):
+        data = UserRegister.parser.parse_args()
+
+        if UserModel.query.filter_by(username = data['username']).first():
+            return {"message": "A user with that username already exists."}, 400
+
+        user = UserModel(data['username'], data['password'])
+        user.save_to_db()
+        response = make_response({"message": "User Registered sucessfully."})
+        access_token = create_access_token(identity = user.id)
+        set_access_cookies(response, access_token)
+        return response
+
+
+
+class UserLogin(Resource):
     parser = reqparse.RequestParser()
     parser.add_argument('username',
                         type=str,
@@ -16,12 +47,27 @@ class UserRegister(Resource):
                         )
 
     def post(self):
-        data = UserRegister.parser.parse_args()
+        data = UserLogin.parser.parse_args()
+        user = UserModel.query.filter_by(username = data['username']).first()
+        if user and safe_str_cmp(data['password'], user.password):
+            response = make_response({"message": "login successful."})
+            access_token = create_access_token(identity=user.id)
+            set_access_cookies(response, access_token)
+            return response
+        return {"message" : "Invalid Credentials."}
 
-        if UserModel.query.filter_by(username = data['username']).first():
-            return {"message": "A user with that username already exists"}, 400
 
-        user = UserModel(data['username'], data['password'])
-        user.save_to_db()
+class UserLogout(Resource):
+    @jwt_required()
+    def post(self):
+        print("dasda")
+        response = make_response({"message": "logout successful."})
+        unset_jwt_cookies(response)
+        return response
 
-        return {"message": "User created successfully."}, 201
+class Test(Resource):
+    @jwt_required()
+    def get(self):
+        # Access the identity of the current user with get_jwt_identity
+        current_user = get_jwt_identity()
+        return {"current_user" : current_user}, 200

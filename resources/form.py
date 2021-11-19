@@ -43,3 +43,11 @@ class AddForm(Resource):
 
         return form.json(), 201
 
+
+class AddResponse(Resource):
+    def post(self, _id, _title):
+        form = FormModel.query.filter_by(creator_id = _id, title = _title).first()
+        
+        print(form.title)
+        return form.json(), 201
+
