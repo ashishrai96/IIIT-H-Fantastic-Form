@@ -1,4 +1,5 @@
 from db import db
+from models.option import OptionModel
 
 class QuestionModel(db.Model):
     __tablename__ = 'question'
@@ -20,7 +21,7 @@ class QuestionModel(db.Model):
         self.form_id = form_id
 
     def json(self):
-        return {'description': self.description, 'type' : self.type, 'form_id': self.form_id}
+        return {'questionId': self.id,'question': self.question, 'description': self.description, 'type' : self.question_type, 'required': self.required, 'choices': [x.description for x in OptionModel.query.filter_by(ques_id = self.id)]}
 
     @classmethod
     def find_by_id(cls, _id):

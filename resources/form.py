@@ -1,5 +1,8 @@
-from flask_restful import Resource, reqparse
+from flask_jwt_extended.utils import get_jwt_identity
+from flask_restful import Resource
 from flask import request
+from flask_jwt_extended import jwt_required
+
 from models.form import FormModel
 from models.user import UserModel
 from models.question import QuestionModel
@@ -8,17 +11,20 @@ from models.option import OptionModel
 
 class AddForm(Resource):
 
+    @jwt_required()
     def post(self):
         data = request.get_json()
-        print(data)
-        url = "http://127.0.0.1:5000/form/" + str(data['creator_id']) + "/" + data['title']
+        if FormModel.query.filter_by(title = data['title'], creator_id = get_jwt_identity()).first():
+            return {"message" : "form already exists."}
+        url = "http://127.0.0.1:5000/form/" + str(get_jwt_identity()) + "/" + data['title']
         form = FormModel(url,data['title'])
         try:
-            user = UserModel.find_by_id(data['creator_id'])
+            user = UserModel.find_by_id(get_jwt_identity())
             form.creator = user
             form.save_to_db()
+            print(form.id)
         except:
-            return {"message": "An error occurred inserting the form."}, 500
+            return {"message" : "Error adding form to database."}
         for questions in data['items']:
             new_question = QuestionModel(questions['question'], 
                                          questions['description'],
@@ -29,25 +35,14 @@ class AddForm(Resource):
                 new_question.save_to_db()
             except:
                 {"message": "Error adding questions"}
-            print(questions['choices'])
-            for options in questions['choices']:
-                print(options)
-                new_option = OptionModel(new_question.id, options)
-                print(type(new_option))
-                try:
-                    print("sadasd")
-                    new_option.save_to_db()
-                except:
-                    {"message":"Error adding option"}
-
-
+            if questions['type'] != 1:
+                for options in questions['choices']:
+                    new_option = OptionModel(new_question.id, options)
+                    try:
+                        new_option.save_to_db()
+                    except:
+                        return {"message":"Error adding option"}
         return form.json(), 201
 
 
-class AddResponse(Resource):
-    def post(self, _id, _title):
-        form = FormModel.query.filter_by(creator_id = _id, title = _title).first()
-        
-        print(form.title)
-        return form.json(), 201
 
