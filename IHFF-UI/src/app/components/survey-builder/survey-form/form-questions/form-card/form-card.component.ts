@@ -12,6 +12,7 @@ export class FormCardComponent implements OnInit, OnChanges {
   @Input() value: FormElement;
   @Input() index: number;
   @Input() allowEdit: boolean = true;
+  @Input() readonly: boolean = false;
   @Output() onClone: EventEmitter<any> = new EventEmitter<any>();
   @Output() onDelete: EventEmitter<any> = new EventEmitter<any>();
   

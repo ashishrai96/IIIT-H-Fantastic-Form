@@ -1,5 +1,4 @@
 .card {
-    margin: 10px 15px;
 
     &.edit-mode {
         border-left: 4px solid #34808f;
@@ -48,7 +47,7 @@
 
         .text-group {
             flex: 1;
-            
+
             .text-answer {
                 background-color: #fff;
                 margin: 10px;

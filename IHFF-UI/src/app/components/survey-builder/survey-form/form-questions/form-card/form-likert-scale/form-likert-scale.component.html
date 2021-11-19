@@ -24,8 +24,10 @@
                 </ng-template>
             </td>
             <td *ngFor="let choice of choices">
-                <p-radioButton [name]="'stmt'+index" [value]="choice" [(ngModel)]="answer[index]" 
-                    (onClick)="onAnswerChange()" [disabled]="editMode"></p-radioButton>
+                <ng-container *ngIf="answer?.length>0">
+                    <p-radioButton [ngClass]="{'readonly': readonly}" [name]="'stmt'+index" [value]="choice" [(ngModel)]="answer[index]" 
+                        (onClick)="onAnswerChange()" [disabled]="editMode || readonly"></p-radioButton>
+                </ng-container>
             </td>
         </tr>
         <tr *ngIf="editMode">

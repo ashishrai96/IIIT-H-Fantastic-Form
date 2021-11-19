@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
+import { LoaderService } from 'src/app/shared/components/loader/loader.service';
 import { Constants } from 'src/app/shared/models/constants.model';
 import { FormElement } from 'src/app/shared/models/form-element.model';
 import { SurveyBuilderService } from '../../survey-builder.service';
@@ -16,8 +17,14 @@ export class FormResponsesComponent implements OnInit {
   questionArray: any[] = [];
   graph = {};
 
+  activeTab:number = 0;
+  indivForm:FormElement;
+  currentIndex:number = 0;
+
+  readonly = true;
+
   constructor(private activateRoute: ActivatedRoute, 
-    private surveyBuilderService: SurveyBuilderService) { }
+    private surveyBuilderService: SurveyBuilderService, private loader:LoaderService) { }
 
   ngOnInit(): void {
     this.activateRoute.params.subscribe((params: Params) => {
@@ -27,11 +34,30 @@ export class FormResponsesComponent implements OnInit {
     });
   }
 
+  changeTab(index) {
+    this.activeTab = index;
+
+    if(index == 1){
+      this.loadIndividualForm(0);
+    }
+  }
+
+  loadIndividualForm(idx: number) {
+    if(idx < 0 || idx >= this.formArray.length){
+      return;
+    }
+
+    this.indivForm = this.formArray[idx];
+    this.currentIndex = idx;
+  }
+
   loadFormResponse(formId){
+    this.loader.start();
     this.surveyBuilderService.loadResponseByFormId(formId).subscribe((resp:any) => {
       console.log(resp);
       this.formTitle = resp.title;
       this.formArray = [ ...resp.response ];
+      console.log("formArray==", this.formArray);
       this.graph = {};
 
       let stmtData = {};
@@ -109,6 +135,10 @@ export class FormResponsesComponent implements OnInit {
       });
 
       console.log(this.graph);
+      this.loader.stop();
+    },
+    err => {
+      this.loader.stop();
     });
 
 

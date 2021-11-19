@@ -9,11 +9,13 @@ import {InputSwitchModule} from 'primeng/inputswitch';
 import {OrderListModule} from 'primeng/orderlist';
 import {ChartModule} from 'primeng/chart';
 import { LoaderComponent } from './components/loader/loader.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 
 @NgModule({
   declarations: [
-    LoaderComponent
+    LoaderComponent,
+    NotFoundComponent
   ],
   imports: [
     CommonModule,

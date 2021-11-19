@@ -1,0 +1,13 @@
+<div class="form-box">
+    <div class="form-title">
+        <h1>{{ formTitle }}</h1>
+    </div>
+    <div class="form-container">
+        <div class="form-control" *ngFor="let val of formData?.items; let index=index">
+            <app-form-card [value]="val" [index]="index" [allowEdit]="false" [readonly]="false"></app-form-card>
+        </div>
+        <div class="submit" *ngIf="formData">
+            <button class="btn primary" (click)="submitResponse()">Submit</button>
+        </div>
+    </div>
+</div>

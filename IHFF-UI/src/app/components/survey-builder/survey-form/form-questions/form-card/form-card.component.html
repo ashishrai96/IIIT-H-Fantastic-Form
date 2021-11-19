@@ -11,11 +11,17 @@
         </div>
         <div class="description">
             <label *ngIf="!value.editMode && value.description?.length>0">{{ value.description }}</label>
-            <textarea *ngIf="value.editMode" rows="3" placeholder="Enter Description" [(ngModel)]="value.description"></textarea>
+            <textarea *ngIf="value.editMode" rows="3" placeholder="Enter Description" 
+                [(ngModel)]="value.description" [readonly]="readonly"></textarea>
         </div>
         <div class="answer-body">
             <ng-container *ngIf="value.type == constants.FORM_ELEM_TEXT_OPTION">
-                <input type="text" placeholder="Enter Answer" [disabled]="value.editMode" [(ngModel)]="value.answer"/>
+                <ng-container *ngIf="readonly else textInput">
+                    <div class="txt-answer"><strong>Answer:&nbsp;</strong> {{ value.answer }}</div>
+                </ng-container>
+                <ng-template #textInput>
+                    <input type="text" placeholder="Enter Answer" [disabled]="value.editMode" [(ngModel)]="value.answer" [readonly]="readonly" />
+                </ng-template>
             </ng-container>
             <ng-container *ngIf="value.type == constants.FORM_ELEM_CHOICE_OPTION">
                 <ng-container *ngIf="value.isMultiChoice else singleChoice">
@@ -39,7 +45,7 @@
                     </ng-container>
                     <ng-template #MultiReadOnly>
                         <p-checkbox class="readonly-choice" *ngFor="let choice of value.choices"
-                            name="answer" [value]="choice" [label]="choice" [(ngModel)]="value.answer"></p-checkbox>
+                            name="answer" [value]="choice" [label]="choice" [(ngModel)]="value.answer" [readonly]="readonly"></p-checkbox>
                     </ng-template>
                 </ng-container>
                 <ng-template #singleChoice>
@@ -62,14 +68,15 @@
                         </p-orderList>
                     </ng-container>
                     <ng-template #SingleReadOnly>
-                        <p-radioButton class="readonly-choice" *ngFor="let choice of value.choices"
-                            name="answer" [value]="choice" [label]="choice" [(ngModel)]="value.answer"></p-radioButton>
+                        <p-radioButton [ngClass]="{'readonly': readonly}" class="readonly-choice" *ngFor="let choice of value.choices"
+                            name="answer" [value]="choice" [label]="choice" [(ngModel)]="value.answer" [disabled]="readonly"></p-radioButton>
                     </ng-template>
                 </ng-template>
                 <button class="btn primary" *ngIf="value.editMode" (click)="onAddNewChoice()">Add Choice</button>
             </ng-container>
             <ng-container *ngIf="value.type == constants.FORM_ELEM_LIKER_SCALE_OPTION">
-                <app-form-likert-scale [editMode]="value.editMode" [statements]="value.statements" [choices]="value.choices" (onAnswer)="onLikertAnswerUpdate($event)"></app-form-likert-scale>
+                <app-form-likert-scale [editMode]="value.editMode" [statements]="value.statements" [(ngModel)]="value.answer" name="answer" ngDefaultControl
+                    [choices]="value.choices" [readonly]="readonly" (onAnswer)="onLikertAnswerUpdate($event)"></app-form-likert-scale>
             </ng-container>
         </div>
         <div class="validations" 

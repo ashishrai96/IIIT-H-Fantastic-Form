@@ -15,9 +15,7 @@ export class FormResponseCardComponent implements OnInit {
 
   constants = Constants;
 
-
   stackedData;
-
   stackedOptions = {
     tooltips: {
       mode: 'index',
@@ -32,7 +30,6 @@ export class FormResponseCardComponent implements OnInit {
 
 
   pieData;
-
   pieOptions = {
     plugins: {
         legend: {
@@ -44,7 +41,6 @@ export class FormResponseCardComponent implements OnInit {
   };
 
   constructor() { }
-
 
   ngOnChanges() {
     console.log(this.value, this.graphData, this.index);
