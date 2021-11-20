@@ -11,12 +11,13 @@ export class SignupComponent implements OnInit {
   email:string;
   password:string;
   rpassword:string;
-  
+  validateEmail:boolean=true
+  recheckPwd=true
   constructor() { }
 
   ngOnInit(): void {
   }
   signup(){
-
+    
   }
 }

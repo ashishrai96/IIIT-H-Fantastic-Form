@@ -9,6 +9,7 @@ import { LoginService } from './service/login.service';
 export class LoginComponent implements OnInit {
   check:boolean=true;
   validateEmail:boolean=true;
+  emptyPwd:boolean=true;
   email:string;
   password:string;
   constructor(private loginService : LoginService) { }
@@ -24,6 +25,10 @@ export class LoginComponent implements OnInit {
     if(this.validateEmail==false){
         this.email="";
         return;  
+    }
+    if(this.password == null ){
+      this.emptyPwd=false;
+      return;
     }
     this.loginService.login(this.email,this.password).subscribe((resp) => {
       console.log(resp);
