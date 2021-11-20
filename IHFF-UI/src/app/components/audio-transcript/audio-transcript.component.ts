@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AudioTranscriptService } from './service/audio-transcript.service';
 
 @Component({
   selector: 'app-audio-transcript',
@@ -6,10 +7,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./audio-transcript.component.scss']
 })
 export class AudioTranscriptComponent implements OnInit {
-
-  constructor() { }
+  filename:string;
+  fileInfo:string;
+  transcript:string;
+  description:string;
+  constructor(private audioService : AudioTranscriptService) { }
 
   ngOnInit(): void {
   }
 
+  myUploader(event) {
+    this.filename=event.files[0].name;
+    console.log(event.files[0])  
+  }
 }

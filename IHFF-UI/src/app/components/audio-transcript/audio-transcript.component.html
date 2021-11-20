@@ -1,1 +1,16 @@
-<p>audio-transcript works!</p>
+<div class="audio-trans">
+    <h3 class="heading">Audio Transcript</h3>
+    
+    <div class="form-group"> 
+        <p-fileUpload url="" name="myfile[]" [customUpload]="true" (uploadHandler)="myUploader($event)"></p-fileUpload>
+    </div>
+    <div class="form-group">
+        <input type="text"  placeholder="Description" name="description" [(ngModel)] = "description">
+    </div>
+    
+    <div  class="transcript" >
+        <h4 class = "sub_heading">Transcript:</h4>
+        <textarea readonly name="transcript" cols="30" rows="10">{{transcript}}</textarea>
+    </div>
+    
+</div>
