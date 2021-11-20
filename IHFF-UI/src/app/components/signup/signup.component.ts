@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SignupService } from './service/signup.service';
 
 @Component({
   selector: 'app-signup',
@@ -17,7 +18,7 @@ export class SignupComponent implements OnInit {
   rpassword:string;
   rpwd:boolean;
   recheckPwd:boolean;
-  constructor() { }
+  constructor(private signupService:SignupService) { }
 
   ngOnInit(): void {
   }
@@ -50,6 +51,14 @@ export class SignupComponent implements OnInit {
     if( !this.fname || !this.lname || !this.password || !this.recheckPwd || !this.validateEmail){
       return;
     }
-
+    this.signupService.signup(this.firstname,this.lastname,this.email,this.password).subscribe((resp) => {
+      console.log(resp);
+      if(resp['response'] != "success"){
+        console.log("Some Error");
+      }
+    }, 
+    (err)=> {
+      console.log(err);
+    });
   }
 }
