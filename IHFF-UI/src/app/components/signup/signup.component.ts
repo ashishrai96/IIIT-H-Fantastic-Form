@@ -31,13 +31,13 @@ export class SignupComponent implements OnInit {
     this.rpwd=true;
     this.recheckPwd=true;
     this.respCheck=true;
-    if(this.firstname==null)
+    if(this.firstname==null || this.firstname.length==0)
       this.fname=false;
-    if(this.lastname==null)
+    if(this.lastname==null || this.lastname.length ==0)
       this.lname=false;
-    if(this.password==null)
+    if(this.password==null || this.password.length ==0)
       this.pwd=false;
-    if(this.rpassword == null)
+    if(this.rpassword == null || this.rpassword.length==0)
       this.rpwd=false;
     if(this.rpwd == true && this.password != this.rpassword){
       this.password="";

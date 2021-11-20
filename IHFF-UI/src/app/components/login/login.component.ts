@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
     if(this.validateEmail==false){
         this.email=""; 
     }
-    if(this.password == null ){
+    if(this.password ==null || this.password.length ==0 ){
       this.emptyPwd=false;
     }
     if(this.emptyPwd ==false || this.validateEmail ==false){
