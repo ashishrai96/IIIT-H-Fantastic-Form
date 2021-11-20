@@ -18,6 +18,7 @@ export class SignupComponent implements OnInit {
   rpassword:string;
   rpwd:boolean;
   recheckPwd:boolean;
+  respCheck:boolean;
   constructor(private signupService:SignupService) { }
 
   ngOnInit(): void {
@@ -29,6 +30,7 @@ export class SignupComponent implements OnInit {
     this.pwd=true;
     this.rpwd=true;
     this.recheckPwd=true;
+    this.respCheck=true;
     if(this.firstname==null)
       this.fname=false;
     if(this.lastname==null)
@@ -54,6 +56,8 @@ export class SignupComponent implements OnInit {
     this.signupService.signup(this.firstname,this.lastname,this.email,this.password).subscribe((resp) => {
       console.log(resp);
       if(resp['response'] != "success"){
+        this.email="";
+        this.respCheck=false;
         console.log("Some Error");
       }
     }, 

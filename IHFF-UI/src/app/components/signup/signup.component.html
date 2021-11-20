@@ -10,8 +10,9 @@
             <div class="msg" *ngIf="lname==false">Please enter Lastname</div>
         </div>
         <div class="form-group">
-            <input type="email" class="in" [ngClass]="{'error-input': validateEmail==false,'no-error':validateEmail==true}" placeholder="Email *" value="" name="email" [(ngModel)]="email"required/>
+            <input type="email" class="in" [ngClass]="{'error-input': validateEmail==false||respCheck==false,'no-error':validateEmail==true && respCheck == true}" placeholder="Email *" value="" name="email" [(ngModel)]="email"required/>
             <div class="msg" *ngIf="validateEmail==false">Please enter validate Email id</div>
+            <div class="msg" *ngIf="respCheck==false">This email id is already registered</div>
         </div>
         <div class="form-group">
             <input type="password" class="in"  [ngClass]="{'error-input': pwd==false,'no-error':pwd==true}" placeholder="Password *" value="" name="password" [(ngModel)]="password" required>
