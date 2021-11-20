@@ -19,7 +19,13 @@
             box-sizing: border-box;
            
           }
-
+          .error-input{
+            border-color: red;
+          }
+          .msg{
+            color: red;
+            font-size: small;
+          }
           input[type=submit]{
             width: 40%;
             padding: 12px 20px;
