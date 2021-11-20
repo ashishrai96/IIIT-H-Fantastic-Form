@@ -7,9 +7,9 @@ import { LoginService } from './service/login.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  check:boolean=true;
-  validateEmail:boolean=true;
-  emptyPwd:boolean=true;
+  check:boolean;
+  validateEmail:boolean;
+  emptyPwd:boolean;
   email:string;
   password:string;
   constructor(private loginService : LoginService) { }
@@ -20,14 +20,18 @@ export class LoginComponent implements OnInit {
 
   login(){
     console.log(this.email,this.password);
+    this.validateEmail=true;
+    this.emptyPwd=true;
+    this.check=true;
     const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     this.validateEmail =re.test(this.email);
     if(this.validateEmail==false){
-        this.email="";
-        return;  
+        this.email=""; 
     }
     if(this.password == null ){
       this.emptyPwd=false;
+    }
+    if(this.emptyPwd ==false || this.validateEmail ==false){
       return;
     }
     this.loginService.login(this.email,this.password).subscribe((resp) => {
