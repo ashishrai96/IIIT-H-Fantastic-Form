@@ -1,0 +1,20 @@
+.box{
+    border-left: 4px solid #34808f;
+    border-radius: 10px;
+    overflow: hidden;
+
+    .heading{
+        margin-left: 30%;
+        font-size: 2rem;
+    }
+    .fileIcon{
+        margin-top: 8%;
+        display: inline-block;
+        margin-left: 15%;
+        .desc{
+            font-size: 1.2rem;
+            font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            padding-left: 10px;
+        }
+    }
+}

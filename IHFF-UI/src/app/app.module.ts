@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
@@ -13,6 +14,7 @@ import { FormCardComponent } from './components/survey-form/form-questions/form-
 import { FormsModule } from '@angular/forms';
 import { LoginComponent } from './components/login/login.component';
 import { SignupComponent } from './components/signup/signup.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 
 @NgModule({
@@ -25,14 +27,14 @@ import { SignupComponent } from './components/signup/signup.component';
     FormCardComponent,
     LoginComponent,
     SignupComponent,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     SharedModule,
     FormsModule,
-    HttpClientModule
-    
+    HttpClientModule,    
   ],
   providers: [],
   bootstrap: [AppComponent]

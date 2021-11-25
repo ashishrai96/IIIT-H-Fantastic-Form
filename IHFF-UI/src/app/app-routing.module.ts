@@ -6,6 +6,7 @@ import { SignupComponent } from './components/signup/signup.component';
 import { FormQuestionsComponent } from './components/survey-form/form-questions/form-questions.component';
 import { FormResponsesComponent } from './components/survey-form/form-responses/form-responses.component';
 import { SurveyFormComponent } from './components/survey-form/survey-form.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 const routes: Routes = [
   { 
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'transcript', component: AudioTranscriptComponent },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
+  { path: 'dashboard', component: DashboardComponent },
 ];
 
 @NgModule({
