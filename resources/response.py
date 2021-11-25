@@ -49,5 +49,14 @@ class AddResponse(Resource):
 
 class GetResponse(Resource):
     @jwt_required()
-    def get():
-        return {"message" : "Api under construction"}
+    def get(self, _id, _title):
+        form = FormModel.query.filter_by(title = _title, creator_id = _id).first() 
+        resObj = form.response
+        users = set()
+        for i in resObj:
+            users.add(i.user_id)
+        responses = {}
+        for i in users:
+            responses[i] = ResponseModel.resp_user(i,form.id)
+        print(responses)
+        return responses 
