@@ -7,5 +7,7 @@ import { HttpClient } from '@angular/common/http';
 export class AudioTranscriptService {
 
   constructor(private http:HttpClient) { }
-
+  upload(data){
+    return this.http.post("",data);
+  }
 }
