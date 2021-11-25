@@ -24,6 +24,7 @@ class ResponseModel(db.Model):
         l = []
         for i in obj:
             temp = {"question_id" : i.ques_id, "response" : i.response}
-        l.append(temp)
-        return {"user_id" : l}
+            l.append(temp)
+        print(l)
+        return l
     

@@ -4,7 +4,7 @@ from flask_jwt_extended import JWTManager
 
 from resources.user import Test, UserLogin, UserRegister, UserLogout
 from resources.form import AddForm
-from resources.response import AddResponse
+from resources.response import AddResponse, GetResponse
 from resources.question import QuestionList, Question
 from models.option import OptionModel
 from models.response import ResponseModel
@@ -32,6 +32,7 @@ api.add_resource(UserLogin, '/login')
 api.add_resource(UserLogout, '/logout')
 api.add_resource(AddForm, '/addform')
 api.add_resource(AddResponse,'/form/<int:_id>/<string:_title>')
+api.add_resource(GetResponse, '/response/<int:_id>/<string:_title>')
 
 
 if __name__ == '__main__':
