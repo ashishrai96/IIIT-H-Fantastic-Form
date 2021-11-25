@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { LoaderService } from 'src/app/shared/components/loader/loader.service';
 import { Constants } from 'src/app/shared/models/constants.model';
 import { FormElement } from 'src/app/shared/models/form-element.model';
 import { SurveyBuilderDataExchangeService } from '../../survey-builder-data-exchange.service';
+import { SurveyBuilderService } from '../../survey-builder.service';
 
 @Component({
   selector: 'app-form-questions',
@@ -18,7 +20,8 @@ export class FormQuestionsComponent implements OnInit {
   preview: boolean = false;
   private isLive: boolean = false;
 
-  constructor(private surveyDataExchnage: SurveyBuilderDataExchangeService) { }
+  constructor(private surveyDataExchnage: SurveyBuilderDataExchangeService, 
+    private surveyService: SurveyBuilderService, private loader: LoaderService) { }
 
   ngOnInit(): void {
     this.surveyDataExchnage.getPreview().subscribe((preview:boolean) => {
@@ -80,6 +83,17 @@ export class FormQuestionsComponent implements OnInit {
     };
 
     console.log(JSON.stringify(form));
+
+    this.loader.start();
+    this.surveyService.saveForm(form).subscribe((resp:any) => {
+      console.log("Response for save => ", resp);
+      this.loader.stop();
+    },
+    err => {
+      console.error("Form saving response => ", err);
+      this.loader.stop();
+    });
+
   }
 
 }

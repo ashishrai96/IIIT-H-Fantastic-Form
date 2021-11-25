@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -15,6 +15,9 @@ import { FormsModule } from '@angular/forms';
 import { FormLikertScaleComponent } from './components/survey-builder/survey-form/form-questions/form-card/form-likert-scale/form-likert-scale.component';
 import { SurveyBuilderComponent } from './components/survey-builder/survey-builder.component';
 import { FormResponseCardComponent } from './components/survey-builder/survey-form/form-responses/form-response-card/form-response-card.component';
+import { FormLiveComponent } from './components/survey-builder/survey-form/form-live/form-live.component';
+import { AuthInterceptor } from './auth/auth-interceptor.service';
+import { LoginComponent } from './auth/login/login.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +30,8 @@ import { FormResponseCardComponent } from './components/survey-builder/survey-fo
     FormLikertScaleComponent,
     SurveyBuilderComponent,
     FormResponseCardComponent,
+    FormLiveComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
@@ -36,7 +41,7 @@ import { FormResponseCardComponent } from './components/survey-builder/survey-fo
     FormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [ { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true } ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -12,4 +12,12 @@ export class SurveyBuilderService {
     return this.http.get('https://6194ea0374c1bd00176c6a11.mockapi.io/api/vi/response/');
   }
 
+  saveForm(form:any){
+    return this.http.post('', form);
+  }
+
+  showForm(formId, formTitle){
+    return this.http.get('');
+  }
+
 }

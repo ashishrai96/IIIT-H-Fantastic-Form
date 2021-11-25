@@ -13,6 +13,7 @@ export class FormLiveComponent implements OnInit {
 
   formData: any;
   formTitle: string;
+  formId: string;
 
   constructor(private activateRoute: ActivatedRoute, 
     private surveyService: SurveyBuilderService, private loader: LoaderService) { }
@@ -20,17 +21,21 @@ export class FormLiveComponent implements OnInit {
   ngOnInit(): void {
     this.activateRoute.params.subscribe((params:Params) => {
       console.log(params);
-    });
+      if(params != null){
+        this.formId = params['formId'];
+        this.formTitle = params['title'];
 
-    this.loader.start();
-    this.surveyService.loadResponseByFormId(1234567890).subscribe((resp:any) => {
-      this.formData = resp.response[0];
-      this.formTitle = resp.title;
-      this.loader.stop();
-    },
-    err => {
-      console.error(err);
-      this.loader.stop();
+        this.loader.start();
+        this.surveyService.showForm(this.formId, this.formTitle).subscribe((resp:any) => {
+          this.formData = resp.items;
+          this.formTitle = resp.title;
+          this.loader.stop();
+        },
+        err => {
+          console.error(err);
+          this.loader.stop();
+        });
+      }
     });
   }
 
