@@ -13,6 +13,10 @@ class AddResponse(Resource):
     def get(self, _id, _title):
         form = FormModel.query.filter_by(title = _title, creator_id = _id).first() 
         items = [x.json() for x in QuestionModel.query.filter_by(form_id = form.id)]
+        n=len(items)
+        for i in range(n):
+            if items[i]['type']==3:
+                items[i]['isMultiChoice']=True
         for x in QuestionModel.query.filter_by(form_id = form.id):
             print(x.question)
         print(items)

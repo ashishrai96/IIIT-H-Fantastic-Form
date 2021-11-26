@@ -26,6 +26,8 @@ class AddForm(Resource):
         except:
             return {"message" : "Error adding form to database."}
         for questions in data['items']:
+            if questions['type']==0 and questions['isMultiChoice']:
+                questions['type']=3
             new_question = QuestionModel(questions['question'], 
                                          questions['description'],
                                          questions['type'],
