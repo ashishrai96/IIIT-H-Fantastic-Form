@@ -58,7 +58,8 @@ class UserLogin(Resource):
             response = make_response({"message": "login successful.",
                                        "forms" : formPayload,
                                        "status":200 ,
-                                       "access_token":access_token})
+                                       "access_token":access_token,
+                                       "id":user.id})
             set_access_cookies(response, access_token)
             return response
         return {"message" : "Invalid Credentials.","status":500}
