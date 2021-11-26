@@ -54,11 +54,12 @@ class UserLogin(Resource):
             formPayload = [{x.title: x.url} for x in FormModel.query.filter_by(creator_id = user.id)]
             print(formPayload)
             response = make_response({"message": "login successful.",
-                                       "forms" : formPayload })
+                                       "forms" : formPayload,
+                                       "status":200 })
             access_token = create_access_token(identity=user.id)
             set_access_cookies(response, access_token)
             return response
-        return {"message" : "Invalid Credentials."}
+        return {"message" : "Invalid Credentials.","status":500}
 
 
 class UserLogout(Resource):
