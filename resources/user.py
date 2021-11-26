@@ -65,6 +65,16 @@ class UserLogin(Resource):
                         required=True,
                         help="This field cannot be blank."
                         )
+    parser.add_argument('firstname',
+                        type=str,
+                        required=True,
+                        help="Firstname cannot be blank."
+                        )
+    parser.add_argument('lastname',
+                        type=str,
+                        required=True,
+                        help="Lastname cannot be blank."
+                        )
 
     def post(self):
         data = UserLogin.parser.parse_args()
