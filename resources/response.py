@@ -97,7 +97,7 @@ class GetResponse(Resource):
             for question in temp['items']:
                 if question['type'] == 2:
                     question['answer'] = responses[question['questionId']].split(' $$$ ')
-                elif question['isMultichoice']:
+                elif question['isMultiChoice']:
                     question['answer'] = responses[question['questionId']].split(' $$$ ')
                 else:
                     question['answer'] = responses[question['questionId']]
