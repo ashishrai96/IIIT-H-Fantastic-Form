@@ -1,0 +1,20 @@
+<div class="login-form">
+    <h3 class="heading">Login</h3>
+    <form action="#" method="#" (ngSubmit)="login()">
+        <div class="form-group">
+            
+            <input type="email" class="in" [ngClass]="{'error-input': check==false || validateEmail==false}" placeholder="Email *" name="email" [(ngModel)]="email" required/>
+            <div class="msg" *ngIf="validateEmail == false">Please enter proper email format</div>
+            <div class="msg" *ngIf="check==false">Incorrect Email Id</div>
+        </div>
+        <div class="form-group">
+            <input type="password" class="in"  [ngClass]="{'error-input': check==false || emptyPwd == false}"  placeholder="Password *" name="password" [(ngModel)]="password" required/>
+            <div class="msg" *ngIf="emptyPwd == false">Please enter password</div>
+            <div class="msg" *ngIf="check == false">Incorrect Password</div>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="login"/>
+        </div>
+     
+    </form>
+</div>

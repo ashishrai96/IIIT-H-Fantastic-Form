@@ -10,6 +10,7 @@ import {OrderListModule} from 'primeng/orderlist';
 import {ChartModule} from 'primeng/chart';
 import { LoaderComponent } from './components/loader/loader.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import {FileUploadModule} from 'primeng/fileupload';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
     CheckboxModule,
     InputSwitchModule,
     OrderListModule,
-    ChartModule
+    ChartModule,
+    FileUploadModule
   ],
   exports: [
     AvatarModule,
@@ -37,7 +39,8 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
     InputSwitchModule,
     OrderListModule,
     ChartModule,
-    LoaderComponent
+    LoaderComponent,
+    FileUploadModule
   ]
 })
 export class SharedModule { }

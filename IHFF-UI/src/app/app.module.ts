@@ -17,7 +17,11 @@ import { SurveyBuilderComponent } from './components/survey-builder/survey-build
 import { FormResponseCardComponent } from './components/survey-builder/survey-form/form-responses/form-response-card/form-response-card.component';
 import { FormLiveComponent } from './components/survey-builder/survey-form/form-live/form-live.component';
 import { AuthInterceptor } from './auth/auth-interceptor.service';
-import { LoginComponent } from './auth/login/login.component';
+// import { LoginComponent } from './auth/login/login.component';
+import { LoginComponent } from './components/login/login.component';
+import { SignupComponent } from './components/signup/signup.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+
 
 @NgModule({
   declarations: [
@@ -32,6 +36,8 @@ import { LoginComponent } from './auth/login/login.component';
     FormResponseCardComponent,
     FormLiveComponent,
     LoginComponent,
+    SignupComponent,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,
@@ -39,7 +45,7 @@ import { LoginComponent } from './auth/login/login.component';
     AppRoutingModule,
     SharedModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,    
   ],
   providers: [ { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true } ],
   bootstrap: [AppComponent]
