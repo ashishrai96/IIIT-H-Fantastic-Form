@@ -30,7 +30,6 @@ class AddResponse(Resource):
     def post(self, _id, _title):
         data = request.get_json()
         user = UserModel.find_by_id(get_jwt_identity())
-        data['formId'] = FormModel.query.filter_by(title = _title, creator_id = _id).first().id 
         form = FormModel.find_by_id(data['formId'])
         if ResponseModel.query.filter_by(user_id = user.id, form_id = form.id).first():
             return {"message" : "You've already added a response"}
