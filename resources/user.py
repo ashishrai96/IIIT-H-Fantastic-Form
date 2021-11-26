@@ -78,3 +78,16 @@ class Test(Resource):
         # Access the identity of the current user with get_jwt_identity
         current_user = get_jwt_identity()
         return {"current_user" : current_user}, 200
+
+class GetForms(Resource):
+    @jwt_required()
+    def get(self,_id):
+        forms=FormModel.query.filter_by(creator_id = _id)
+        res=[]
+        for form in forms:
+            result={"title": form.title,
+                "creator_id": _id}
+            res.append(result)
+        
+        return {"forms":res, "status":200}
+            
