@@ -54,10 +54,17 @@ class AddResponse(Resource):
         data = request.get_json()
         user = UserModel.find_by_id(get_jwt_identity())
         form = FormModel.find_by_id(data['formId'])
+        # ques = set()
+        # quesObj = form.questions
+        # for i in quesObj:
+        #     ques.add(i.id)
+        # print(ques)
         if ResponseModel.query.filter_by(user_id = user.id, form_id = form.id).first():
             return {"message" : "You've already added a response"}
         for question in data['items']:
             print(question)
+            # if question['questionId'] not in ques:
+            #     return{"message": "Invalid Response."}
             quesObj = QuestionModel.find_by_id(question['questionId'])
             answer = ""
             if question['isMultiChoice']:
@@ -76,13 +83,23 @@ class AddResponse(Resource):
 class GetResponse(Resource):
     @jwt_required()
     def get(self, _id, _title):
+        formstruc = get_form_structure(_id, _title)
+        print(formstruc)
         form = FormModel.query.filter_by(title = _title, creator_id = _id).first() 
         resObj = form.response
         users = set()
         for i in resObj:
             users.add(i.user_id)
-        responses = {}
+        response = []
         for i in users:
-            responses[i] = ResponseModel.resp_user(i,form.id)
-        print(responses)
-        return responses 
+            responses = ResponseModel.resp_user(i,form.id)
+            temp = formstruc
+            for question in temp['items']:
+                if question['type'] == 2:
+                    question['answer'] = responses[question['questionId']].split(' $$$ ')
+                elif question['isMultichoice']:
+                    question['answer'] = responses[question['questionId']].split(' $$$ ')
+                else:
+                    question['answer'] = responses[question['questionId']]
+            response.append(temp)
+        return {form.id : response} 

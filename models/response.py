@@ -21,10 +21,10 @@ class ResponseModel(db.Model):
     @classmethod
     def resp_user(cls, u_id, f_id):
         obj = cls.query.filter_by(user_id = u_id, form_id = f_id )
-        l = []
+        l = {}
         for i in obj:
-            temp = {"question_id" : i.ques_id, "response" : i.response}
-            l.append(temp)
+            temp = {i.ques_id:i.response}
+            l.update(temp)
         print(l)
         return l
     
