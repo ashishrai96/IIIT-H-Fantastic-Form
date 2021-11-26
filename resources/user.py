@@ -27,8 +27,10 @@ class UserRegister(Resource):
 
         user = UserModel(data['username'], data['password'])
         user.save_to_db()
-        response = make_response({"message": "User Registered sucessfully.", "status":200})
         access_token = create_access_token(identity = user.id)
+        response = make_response({"message": "User Registered sucessfully.",
+                                 "status":200,
+                                 "access_token": access_token})
         set_access_cookies(response, access_token)
         return response
 
