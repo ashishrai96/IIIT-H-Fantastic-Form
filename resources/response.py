@@ -18,7 +18,7 @@ def get_statements(question_id):
     return res
 
 def get_form_structure(_id,_title):
-    form = FormModel.query.filter_by(title = _title, creator_id = _id).first() 
+    form = FormModel.query.filter_by(title = _title, creator_id = _id).first()
     items = [x.json() for x in QuestionModel.query.filter_by(form_id = form.id)]
     n=len(items)
     for i in range(n):
@@ -102,4 +102,4 @@ class GetResponse(Resource):
                 else:
                     question['answer'] = responses[question['questionId']]
             response.append(temp)
-        return {form.id : response} 
+        return {"title": form.title, "response" : response}, 200 
