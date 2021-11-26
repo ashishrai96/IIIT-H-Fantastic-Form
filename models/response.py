@@ -25,6 +25,6 @@ class ResponseModel(db.Model):
         for i in obj:
             temp = {i.ques_id:i.response}
             l.update(temp)
-        print(l)
+        #print(l)
         return l
     

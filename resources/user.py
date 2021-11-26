@@ -8,6 +8,16 @@ from flask_jwt_extended import set_access_cookies, create_access_token, jwt_requ
 
 class UserRegister(Resource):
     parser = reqparse.RequestParser()
+    parser.add_argument('firstname',
+                        type=str,
+                        required=True,
+                        help="Firstname cannot be blank."
+                        )
+    parser.add_argument('lastname',
+                        type=str,
+                        required=True,
+                        help="Lastname cannot be blank."
+                        )
     parser.add_argument('username',
                         type=str,
                         required=True,
@@ -25,14 +35,21 @@ class UserRegister(Resource):
         if UserModel.query.filter_by(username = data['username']).first():
             return {"message": "A user with that username already exists.", "status":500}, 400
 
-        user = UserModel(data['username'], data['password'])
+        user = UserModel(data['username'], 
+                         data['password'],
+                         data['firstname'],
+                         data['lastname'])
         user.save_to_db()
         access_token = create_access_token(identity = user.id)
-        response = make_response({"message": "User Registered sucessfully.",
-                                 "status":200,
+        response = make_response({"message": "login successful.",
+                                 "status":201,
+                                 "forms" : [],
+                                 "firstname" : data['firstname'],
+                                 "lastname" : data['lastname'],
+                                 "id" : user.id,
                                  "access_token": access_token})
         set_access_cookies(response, access_token)
-        return response
+        return response, 201
 
 
 
@@ -60,11 +77,13 @@ class UserLogin(Resource):
             response = make_response({"message": "login successful.",
                                        "forms" : formPayload,
                                        "status":200 ,
+                                       "firstname": user.firstname,
+                                       "lastname" : user.lastname,
                                        "access_token":access_token,
                                        "id":user.id})
             set_access_cookies(response, access_token)
-            return response
-        return {"message" : "Invalid Credentials.","status":500}
+            return response, 200
+        return {"message" : "Invalid Credentials.","status":500}, 400
 
 
 class UserLogout(Resource):
@@ -73,7 +92,7 @@ class UserLogout(Resource):
         print("dasda")
         response = make_response({"message": "logout successful."})
         unset_jwt_cookies(response)
-        return response
+        return response, 200
 
 class Test(Resource):
     @jwt_required()
@@ -92,5 +111,5 @@ class GetForms(Resource):
                 "creator_id": _id}
             res.append(result)
         
-        return {"forms":res, "status":200}
+        return {"forms":res, "status":200}, 200
             
