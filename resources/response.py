@@ -39,6 +39,7 @@ def get_form_structure(_id,_title):
         "formId" : form.id,
         "items" : items
     }
+    return formPayload
 
 class AddResponse(Resource):
     @jwt_required()
