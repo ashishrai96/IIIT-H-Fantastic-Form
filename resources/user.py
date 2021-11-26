@@ -23,11 +23,11 @@ class UserRegister(Resource):
         data = UserRegister.parser.parse_args()
 
         if UserModel.query.filter_by(username = data['username']).first():
-            return {"message": "A user with that username already exists."}, 400
+            return {"message": "A user with that username already exists.", "status":500}, 400
 
         user = UserModel(data['username'], data['password'])
         user.save_to_db()
-        response = make_response({"message": "User Registered sucessfully."})
+        response = make_response({"message": "User Registered sucessfully.", "status":200})
         access_token = create_access_token(identity = user.id)
         set_access_cookies(response, access_token)
         return response
