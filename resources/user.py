@@ -33,7 +33,7 @@ class UserRegister(Resource):
         data = UserRegister.parser.parse_args()
 
         if UserModel.query.filter_by(username = data['username']).first():
-            return {"message": "A user with that username already exists.", "status":500}, 400
+            return {"message": "A user with that username already exists.", "status":500}
 
         user = UserModel(data['username'], 
                          data['password'],
@@ -49,7 +49,7 @@ class UserRegister(Resource):
                                  "id" : user.id,
                                  "access_token": access_token})
         set_access_cookies(response, access_token)
-        return response, 201
+        return response
 
 
 
@@ -64,16 +64,6 @@ class UserLogin(Resource):
                         type=str,
                         required=True,
                         help="This field cannot be blank."
-                        )
-    parser.add_argument('firstname',
-                        type=str,
-                        required=True,
-                        help="Firstname cannot be blank."
-                        )
-    parser.add_argument('lastname',
-                        type=str,
-                        required=True,
-                        help="Lastname cannot be blank."
                         )
 
     def post(self):
@@ -92,24 +82,24 @@ class UserLogin(Resource):
                                        "access_token":access_token,
                                        "id":user.id})
             set_access_cookies(response, access_token)
-            return response, 200
-        return {"message" : "Invalid Credentials.","status":500}, 400
+            return response
+        return {"message" : "Invalid Credentials.","status":500}
 
 
 class UserLogout(Resource):
     @jwt_required()
     def post(self):
         print("dasda")
-        response = make_response({"message": "logout successful."})
+        response = make_response({"message": "logout successful.", "status" : 200})
         unset_jwt_cookies(response)
-        return response, 200
+        return response
 
 class Test(Resource):
     @jwt_required()
     def get(self):
         # Access the identity of the current user with get_jwt_identity
         current_user = get_jwt_identity()
-        return {"current_user" : current_user}, 200
+        return {"current_user" : current_user}
 
 class GetForms(Resource):
     @jwt_required()
@@ -121,5 +111,5 @@ class GetForms(Resource):
                 "creator_id": _id}
             res.append(result)
         
-        return {"forms":res, "status":200}, 200
+        return {"forms":res, "status":200}
             
