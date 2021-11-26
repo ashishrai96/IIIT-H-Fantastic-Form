@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { LoaderService } from 'src/app/shared/components/loader/loader.service';
 import { Constants } from 'src/app/shared/models/constants.model';
 import { FormElement } from 'src/app/shared/models/form-element.model';
@@ -20,7 +21,8 @@ export class FormQuestionsComponent implements OnInit {
   preview: boolean = false;
   private isLive: boolean = false;
 
-  constructor(private surveyDataExchnage: SurveyBuilderDataExchangeService, 
+  constructor(private router: Router,
+    private surveyDataExchnage: SurveyBuilderDataExchangeService, 
     private surveyService: SurveyBuilderService, private loader: LoaderService) { }
 
   ngOnInit(): void {
@@ -50,11 +52,11 @@ export class FormQuestionsComponent implements OnInit {
     }
     else if(type == this.constants.FORM_ELEM_CHOICE_OPTION){
       elem.isMultiChoice = false;
-      elem.choices = ['ashish', 'rai'];
+      elem.choices = [''];
     }
     else if(type == this.constants.FORM_ELEM_LIKER_SCALE_OPTION){
-      elem.choices = ['c11', 'c22', 'c33'];
-      elem.statements = ['s1', 's2', 's3'];
+      elem.choices = [''];
+      elem.statements = [''];
     }
 
     console.log(elem);
@@ -88,6 +90,7 @@ export class FormQuestionsComponent implements OnInit {
     this.surveyService.saveForm(form).subscribe((resp:any) => {
       console.log("Response for save => ", resp);
       this.loader.stop();
+      this.router.navigateByUrl("/survey/form/dashboard");
     },
     err => {
       console.error("Form saving response => ", err);

@@ -11,7 +11,7 @@ import {ChartModule} from 'primeng/chart';
 import { LoaderComponent } from './components/loader/loader.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import {FileUploadModule} from 'primeng/fileupload';
-
+import {ToastModule} from 'primeng/toast';
 
 @NgModule({
   declarations: [
@@ -28,7 +28,8 @@ import {FileUploadModule} from 'primeng/fileupload';
     InputSwitchModule,
     OrderListModule,
     ChartModule,
-    FileUploadModule
+    FileUploadModule,
+    ToastModule
   ],
   exports: [
     AvatarModule,
@@ -40,7 +41,8 @@ import {FileUploadModule} from 'primeng/fileupload';
     OrderListModule,
     ChartModule,
     LoaderComponent,
-    FileUploadModule
+    FileUploadModule,
+    ToastModule
   ]
 })
 export class SharedModule { }

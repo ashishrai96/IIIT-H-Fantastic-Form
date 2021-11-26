@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
+import { AuthService } from 'src/app/auth/auth.service';
 import { LoaderService } from 'src/app/shared/components/loader/loader.service';
 import { FormElement } from 'src/app/shared/models/form-element.model';
 import { SurveyBuilderService } from '../../survey-builder.service';
@@ -13,21 +15,22 @@ export class FormLiveComponent implements OnInit {
 
   formData: any;
   formTitle: string;
-  formId: string;
+  creatorId: string;
 
-  constructor(private activateRoute: ActivatedRoute, 
+  constructor(private activateRoute: ActivatedRoute, private router:Router,
+    private messageService:MessageService,
     private surveyService: SurveyBuilderService, private loader: LoaderService) { }
 
   ngOnInit(): void {
     this.activateRoute.params.subscribe((params:Params) => {
       console.log(params);
       if(params != null){
-        this.formId = params['formId'];
+        this.creatorId = params['creatorId'];
         this.formTitle = params['title'];
 
         this.loader.start();
-        this.surveyService.showForm(this.formId, this.formTitle).subscribe((resp:any) => {
-          this.formData = resp.items;
+        this.surveyService.showForm(this.creatorId, this.formTitle).subscribe((resp:any) => {
+          this.formData = resp;
           this.formTitle = resp.title;
           this.loader.stop();
         },
@@ -41,6 +44,22 @@ export class FormLiveComponent implements OnInit {
 
   submitResponse(){
     console.log("To submit = ", this.formData);
+    this.surveyService.submitResponse(this.formData, this.creatorId, this.formTitle)
+      .subscribe((resp:any) => {
+        this.messageService.add({
+          severity: 'success',
+          summary: resp.message
+        });
+
+        this.router.navigateByUrl("/survey/submitted");
+      },
+      err => {
+        console.log(err);
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Failed to submit'
+        });
+      });
   }
 
 }

@@ -1,32 +1,36 @@
-<div class="signup-form">
-    <h3 class="heading">Sign Up</h3>
-    <form action="#" method="#" (ngSubmit)="signup()">
-        <div class="form-group">
-            <input type="text" class="in" [ngClass]="{'error-input': fname==false, 'no-error':fname==true}" placeholder="First Name *" value="" name="firstname" [(ngModel)]="firstname" required>
-            <div class="msg" *ngIf="fname == false">Please enter firstname</div>
-        </div>
-        <div class="form-group">
-            <input type="text" class="in" [ngClass]="{'error-input': lname==false,'no-error':lname==true}" placeholder="Last Name *" value="" name="lastname" [(ngModel)]="lastname" required>
-            <div class="msg" *ngIf="lname==false">Please enter Lastname</div>
-        </div>
-        <div class="form-group">
-            <input type="email" class="in" [ngClass]="{'error-input': validateEmail==false||respCheck==false,'no-error':validateEmail==true && respCheck == true}" placeholder="Email *" value="" name="email" [(ngModel)]="email"required/>
-            <div class="msg" *ngIf="validateEmail==false">Please enter validate Email id</div>
-            <div class="msg" *ngIf="respCheck==false">This email id is already registered</div>
-        </div>
-        <div class="form-group">
-            <input type="password" class="in"  [ngClass]="{'error-input': pwd==false,'no-error':pwd==true}" placeholder="Password *" value="" name="password" [(ngModel)]="password" required>
-            <div class="msg" *ngIf="pwd==false">Please provide some password</div>
-        </div>
-        <div class="form-group">
-            <input type="password" class="in"  [ngClass]="{'error-input': recheckPwd==false || rpwd==false, 'no-error':rpwd==true && recheckPwd == true}" placeholder="Re-enter Password *" value="" name="rpassword" [(ngModel)]="rpassword"required>
-            <div class="msg" *ngIf="rpwd==false">Please provide some password</div>
-            <div class="msg" *ngIf="recheckPwd==false">Password did not matched</div>
-        </div>
-        <div class="form-group">
-            <input type="submit" value="Sign Up" />
-            <input type="reset" value="Reset"/>
-        </div>
-     
-    </form>
+<div class="signup-container">
+
+    <div class="signup-form">
+        <h3 class="heading">Sign Up</h3>
+        <form action="#" method="#" (ngSubmit)="signup()">
+            <div class="form-group">
+                <input type="text" class="in" [ngClass]="{'error-input': fname==false, 'no-error':fname==true}" placeholder="First Name *" value="" name="firstname" [(ngModel)]="firstname" required>
+                <div class="msg" *ngIf="fname == false">Please enter firstname</div>
+            </div>
+            <div class="form-group">
+                <input type="text" class="in" [ngClass]="{'error-input': lname==false,'no-error':lname==true}" placeholder="Last Name *" value="" name="lastname" [(ngModel)]="lastname" required>
+                <div class="msg" *ngIf="lname==false">Please enter Lastname</div>
+            </div>
+            <div class="form-group">
+                <input type="email" class="in" [ngClass]="{'error-input': validateEmail==false||respCheck==false,'no-error':validateEmail==true && respCheck == true}" placeholder="Email *" value="" name="email" [(ngModel)]="email"required/>
+                <div class="msg" *ngIf="validateEmail==false">Please enter validate Email id</div>
+                <div class="msg" *ngIf="respCheck==false">This email id is already registered</div>
+            </div>
+            <div class="form-group">
+                <input type="password" class="in"  [ngClass]="{'error-input': pwd==false,'no-error':pwd==true}" placeholder="Password *" value="" name="password" [(ngModel)]="password" required>
+                <div class="msg" *ngIf="pwd==false">Please provide some password</div>
+            </div>
+            <div class="form-group">
+                <input type="password" class="in"  [ngClass]="{'error-input': recheckPwd==false || rpwd==false, 'no-error':rpwd==true && recheckPwd == true}" placeholder="Re-enter Password *" value="" name="rpassword" [(ngModel)]="rpassword"required>
+                <div class="msg" *ngIf="rpwd==false">Please provide some password</div>
+                <div class="msg" *ngIf="recheckPwd==false">Password did not matched</div>
+            </div>
+            <div class="form-group">
+                <button class="btn primary" type="submit" value="Sign Up">Sign up</button>
+                <button class="btn secondary" type="reset" value="Reset">Reset</button>
+            </div>
+            
+        </form>
+    </div>
+    
 </div>

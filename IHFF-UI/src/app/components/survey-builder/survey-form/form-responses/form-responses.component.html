@@ -30,7 +30,7 @@
         <div class="form-control" *ngFor="let val of indivForm.items; let index=index">
             <app-form-card [value]="val" [index]="index" [allowEdit]="false" [readonly]="readonly"></app-form-card>
         </div>
-        <div class="submit">
+        <div class="submit" *ngIf="!readonly">
             <button class="btn primary" (click)="submitResponse()">Submit</button>
         </div>
     </div>

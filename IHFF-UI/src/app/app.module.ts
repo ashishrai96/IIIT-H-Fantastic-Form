@@ -21,6 +21,8 @@ import { AuthInterceptor } from './auth/auth-interceptor.service';
 import { LoginComponent } from './components/login/login.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { MessageService } from 'primeng/api';
+import { FormSubmittedComponent } from './components/survey-builder/survey-form/form-submitted/form-submitted.component';
 
 
 @NgModule({
@@ -38,6 +40,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     LoginComponent,
     SignupComponent,
     DashboardComponent,
+    FormSubmittedComponent,
   ],
   imports: [
     BrowserModule,
@@ -45,9 +48,9 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     AppRoutingModule,
     SharedModule,
     FormsModule,
-    HttpClientModule,    
+    HttpClientModule,
   ],
-  providers: [ { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true } ],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }, MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

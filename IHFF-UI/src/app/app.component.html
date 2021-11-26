@@ -1,29 +1,3 @@
-<div class="app-container">
-  <div class="header">
-    <div class="logo">
-      <img src="https://www.iiit.ac.in/img/iiit-new.png" alt="Logo" />
-      <!-- <img src="assets/images/iiit-new.png" alt="Logo" /> -->
-    </div>
-    <div class="title">Survey Builder</div>
-    <div class="action-center">
-      <div class="avatar">
-        <p-avatar label="A" shape="circle"></p-avatar>
-      </div>
-    </div>
-  </div>
-  <div class="nav-bar">
-    <div class="nav-grp">
-      <div class="nav-item" routerLink="/signup" routerLinkActive="active">Sign Up</div>
-      <div class="nav-item" routerLink="/login" routerLinkActive="active">Login</div>
-      <div class="nav-item" routerLink="/form" routerLinkActive="active">Survey Form</div>
-      <div class="nav-item" routerLink="/transcript" routerLinkActive="active">Transcript</div>
-      <div class="nav-item" routerLink="/dashboard" routerLinkActive="active">Dashboard</div>
-    </div>
-  </div>
-  <div class="container">
-    <div class="content">
-      <router-outlet></router-outlet>
-    </div>
-  </div>
-</div>
+<router-outlet></router-outlet>
 <app-loader></app-loader>
+<p-toast></p-toast>

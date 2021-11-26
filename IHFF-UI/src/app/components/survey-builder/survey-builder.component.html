@@ -6,22 +6,30 @@
       </div>
       <div class="title">Survey Builder</div>
       <div class="action-center">
-        <div class="avatar">
-          <p-avatar label="A" shape="circle"></p-avatar>
+        <div class="avatar" *ngIf="userLabel">
+          <p-avatar [label]="userLabel" shape="circle"></p-avatar>
         </div>
       </div>
     </div>
     <div class="nav-bar">
       <div class="nav-grp">
-        <div class="nav-item" routerLink="form" routerLinkActive="active">Survey Form</div>
-        <div class="nav-item" routerLink="transcript" routerLinkActive="active">Transcript</div>
+        <div class="nav-item" routerLink="signup" routerLinkActive="active">Sign Up</div>
+        <div class="nav-item" routerLink="login" routerLinkActive="active">Login</div>
+        <div class="nav-item" routerLink="form/questions" routerLinkActive="active">Survey Form</div>
+        <div class="nav-item" routerLink="form/transcript" routerLinkActive="active">Transcript</div>
+        <div class="nav-item" routerLink="form/dashboard" routerLinkActive="active">Dashboard</div>
       </div>
-      <div class="action-grp" *ngIf="showActionGroup">
-        <div class="action-item">
-          <button class="btn secondary" (click)="togglePreview()">Preview</button>
-        </div>
-        <div class="action-item">
-          <button class="btn primary" (click)="publishForm()">Publish</button>
+      <div class="action-grp">
+        <ng-container *ngIf="showActionGroup">
+          <div class="action-item">
+            <button class="btn secondary" (click)="togglePreview()">Preview</button>
+          </div>
+          <div class="action-item">
+            <button class="btn primary" (click)="publishForm()">Publish</button>
+          </div>
+        </ng-container>
+        <div class="action-item" *ngIf="isLoggedIn">
+          <button class="btn primary" (click)="logoutUser()">Logout</button>
         </div>
       </div>
     </div>

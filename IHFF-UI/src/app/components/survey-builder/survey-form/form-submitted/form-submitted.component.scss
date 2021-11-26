@@ -1,0 +1,31 @@
+.submit-container {
+    padding: 20px;
+
+    .submit-title {
+        font-size: 75px;
+        font-weight: 700;
+        color: #34808f;
+
+        i {
+            font-size: 75px;
+        }
+    }
+
+    .summary {
+        font-size: 25px;
+        color: #53565a;
+    }
+
+    .msg {
+        color: #53565a;
+        font-size: 16px;
+
+        span.link-text {
+            font-weight: 700;
+            cursor: pointer;
+            color: #34808f;
+            font-size: 20px;
+            text-decoration: underline;
+        }
+    }
+}

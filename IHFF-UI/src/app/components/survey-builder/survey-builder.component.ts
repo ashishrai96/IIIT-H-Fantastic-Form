@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
+import { AuthService } from 'src/app/auth/auth.service';
+import { LoginService } from '../login/service/login.service';
 import { SurveyBuilderDataExchangeService } from './survey-builder-data-exchange.service';
 
 @Component({
@@ -9,10 +11,13 @@ import { SurveyBuilderDataExchangeService } from './survey-builder-data-exchange
 })
 export class SurveyBuilderComponent implements OnInit {
 
-  showActionGroup:boolean = false;
+  showActionGroup: boolean = false;
   preview: boolean = false;
+  isLoggedIn: boolean = false;
+  userLabel: string = null;
 
-  constructor(private router: Router, 
+  constructor(private router: Router, private loginService: LoginService,
+    private authService: AuthService,
     private surveyDataExchange: SurveyBuilderDataExchangeService){ }
 
   ngOnInit() {
@@ -31,6 +36,11 @@ export class SurveyBuilderComponent implements OnInit {
         }
       }
     });
+
+    this.authService.isLoggedInSub.subscribe((initial) => {
+      this.isLoggedIn = initial != null;
+      this.userLabel = initial;
+    });
   }
 
   togglePreview() {
@@ -40,6 +50,21 @@ export class SurveyBuilderComponent implements OnInit {
 
   publishForm() {
     this.surveyDataExchange.triggerPublish();
+  }
+
+  logoutUser(){
+    this.loginService.logout().subscribe((resp:any) => {
+      this.authService.logoutUser();
+      this.userLabel = null;
+
+      this.router.navigate(['/']);
+    },
+    err=>{
+      this.authService.logoutUser();
+      this.userLabel = null;
+
+      this.router.navigate(['/']);
+    });
   }
 
 }

@@ -13,30 +13,31 @@ import { NotFoundComponent } from './shared/components/not-found/not-found.compo
 import { LoginComponent } from './components/login/login.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { FormSubmittedComponent } from './components/survey-builder/survey-form/form-submitted/form-submitted.component';
 
 const routes: Routes = [
   {
-    path: 'survey', component: SurveyBuilderComponent, canActivate: [ AuthGuard ],
+    path: 'survey', component: SurveyBuilderComponent,
     children:
     [
       {
-        path: 'form', component: SurveyFormComponent,
+        path: 'form', component: SurveyFormComponent, canActivate: [AuthGuard],
         children: [
           { path: 'questions', component: FormQuestionsComponent },
-          { path: 'responses/:formId', component: FormResponsesComponent },
-          { path: '', pathMatch: 'full', redirectTo: 'questions' }
+          { path: 'responses/:creatorId/:title', component: FormResponsesComponent },
+          { path: 'live/:creatorId/:title', component: FormLiveComponent },
+          { path: 'dashboard', component: DashboardComponent },
+          { path: 'transcript', component: AudioTranscriptComponent },
+          { path: '', pathMatch: 'full', redirectTo: 'questions' },
         ]
       },
-      { path: 'transcript', component: AudioTranscriptComponent },
-      { path: 'live/:formId/:title', component: FormLiveComponent },
-      { path: '', pathMatch: 'full', redirectTo: 'form' },
+      { path: 'submitted', component: FormSubmittedComponent },
+      { path: 'login', component: LoginComponent },
+      { path: 'signup', component: SignupComponent },
+      { path: '', pathMatch: 'full', redirectTo: 'login' },
     ]
   },
-  // { path: 'login', component: LoginComponent },
-  { path: 'transcript', component: AudioTranscriptComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'signup', component: SignupComponent },
-  { path: 'dashboard', component: DashboardComponent },
+  { path: '', pathMatch: 'full', redirectTo: 'survey' },
   { path: '**', component: NotFoundComponent }
 ];
 

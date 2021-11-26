@@ -28,8 +28,8 @@ export class FormResponsesComponent implements OnInit {
 
   ngOnInit(): void {
     this.activateRoute.params.subscribe((params: Params) => {
-      if(params && params['formId']){
-        this.loadFormResponse(params['formId']);
+      if(params && params['creatorId'] && params['title']){
+        this.loadFormResponse(params['creatorId'], params['title']);
       }
     });
   }
@@ -51,11 +51,11 @@ export class FormResponsesComponent implements OnInit {
     this.currentIndex = idx;
   }
 
-  loadFormResponse(formId){
+  loadFormResponse(creatorId, formTitle){
     this.loader.start();
-    this.surveyBuilderService.loadResponseByFormId(formId).subscribe((resp:any) => {
+    this.surveyBuilderService.loadResponseByFormId(creatorId, formTitle).subscribe((resp:any) => {
       console.log(resp);
-      this.formTitle = resp.title;
+      this.formTitle = formTitle;
       this.formArray = [ ...resp.response ];
       console.log("formArray==", this.formArray);
       this.graph = {};
