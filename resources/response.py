@@ -17,6 +17,7 @@ class AddResponse(Resource):
         for i in range(n):
             if items[i]['type']==3:
                 items[i]['isMultiChoice']=True
+                items[i]['type']=0
         for x in QuestionModel.query.filter_by(form_id = form.id):
             print(x.question)
         print(items)
