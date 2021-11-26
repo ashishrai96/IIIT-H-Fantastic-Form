@@ -7,6 +7,7 @@ from models.form import FormModel
 from models.user import UserModel
 from models.question import QuestionModel
 from models.option import OptionModel
+from models.statement import StatementModel
 
 
 class AddForm(Resource):
@@ -44,6 +45,14 @@ class AddForm(Resource):
                         new_option.save_to_db()
                     except:
                         return {"message":"Error adding option"}
+    
+            if questions['type'] == 2:
+                for statement in questions['statements']:
+                    new_statement = StatementModel(new_question.id, statement)
+                    try:
+                        new_statement.save_to_db()
+                    except:
+                        return {"message":"Error adding statement"}
         return form.json(), 201
 
 

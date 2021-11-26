@@ -6,6 +6,16 @@ from models.form import FormModel
 from models.user import UserModel
 from models.question import QuestionModel
 from models.response import ResponseModel
+from models.statement import StatementModel
+
+def get_statements(question_id):
+    statements= StatementModel.query.filter_by(ques_id=question_id)
+    res=[]
+    for statement in statements:
+        state=statement.statement
+        res.append(state)
+    
+    return res
 
 
 class AddResponse(Resource):
@@ -20,6 +30,10 @@ class AddResponse(Resource):
                 items[i]['type']=0
             else:
                 items[i]['isMultiChoice']=False
+            
+            if items[i]['type']==2:
+                items[i]['statements']=get_statements(items[i]['questionId'])
+
         for x in QuestionModel.query.filter_by(form_id = form.id):
             print(x.question)
         print(items)
@@ -45,6 +59,9 @@ class AddResponse(Resource):
             quesObj = QuestionModel.find_by_id(question['questionId'])
             answer = ""
             if question['isMultiChoice']:
+                for i in question['answer']:
+                    answer = answer + i + " $$$ "
+            elif question['type']==2:
                 for i in question['answer']:
                     answer = answer + i + " $$$ "
             else:
