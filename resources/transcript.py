@@ -66,7 +66,8 @@ class Transcipt(Resource):
     def post(self):
         if 'file' not in request.files:
             data = {
-            500 : "Audio could not be Transcribed. Faulty Audio. Please Try Again."
+                'status': 500,
+                'message': "Audio could not be Transcribed. Faulty Audio. Please Try Again."
             }
             return data
         f = request.files['file']
@@ -81,11 +82,13 @@ class Transcipt(Resource):
             f.close()
             os.remove("transcription.txt")
             data = {
-            200 : file_text
+                'status': 200,
+                'message' : file_text
             }
             return data
         else:
             data = {
-            500 : "Audio could not be Transcribed. Faulty Audio. Please Try Again."
+                'status': 500,
+                'message' : "Audio could not be Transcribed. Faulty Audio. Please Try Again."
             }
             return data
