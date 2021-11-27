@@ -57,8 +57,8 @@ class AddForm(Resource):
 
 
 class DeactivateForm(Resource):
-    @jwt_required
-    def post(_id, _title):
+    @jwt_required()
+    def post(self,_id, _title):
         form = FormModel.query.filter_by(title = _title, creator_id = _id).first()
         form.active = False
         FormModel.save_to_db(form)
