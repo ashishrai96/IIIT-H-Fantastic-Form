@@ -78,6 +78,9 @@
                 <app-form-likert-scale [editMode]="value.editMode" [statements]="value.statements" [(ngModel)]="value.answer" name="answer" ngDefaultControl
                     [choices]="value.choices" [readonly]="readonly" (onAnswer)="onLikertAnswerUpdate($event)"></app-form-likert-scale>
             </ng-container>
+            <div class="clear-action" *ngIf="!allowEdit && !readonly">
+                <span (click)="clearAnswer()" >Clear Answer</span>
+            </div>
         </div>
         <div class="validations" 
             *ngIf="value.editMode 

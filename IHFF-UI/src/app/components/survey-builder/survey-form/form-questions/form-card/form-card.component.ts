@@ -102,6 +102,15 @@ export class FormCardComponent implements OnInit, OnChanges {
     console.log(this.value);
   }
 
+  clearAnswer(){
+    if(this.value.type == this.constants.FORM_ELEM_LIKER_SCALE_OPTION){
+      setTimeout(() => { this.value.answer = [ ...new Array(this.value.statements.length).fill(null) ]; }, 0);
+    }
+    else{
+      this.value.answer = "";
+    }
+  }
+
   choiceTrackBy = (index, item) => index;
 
 }

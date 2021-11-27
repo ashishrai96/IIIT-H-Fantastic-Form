@@ -88,6 +88,17 @@
                     }
                 }
             }
+
+            .clear-action {
+                margin: 15px 0px 0px 10px;
+                
+                span {
+                    font-size: 14px;
+                    color: #34808f;
+                    text-decoration: underline;
+                    cursor: pointer;
+                }
+            }
         }
 
         .validations {
