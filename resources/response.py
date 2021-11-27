@@ -105,4 +105,4 @@ class GetResponse(Resource):
                 else:
                     question['answer'] = responses[question['questionId']]
             response.append(temp)
-        return {"title": form.title, "response" : response}, 200 
+        return {"title": form.title, "response" : response, "active":form.active}, 200 
