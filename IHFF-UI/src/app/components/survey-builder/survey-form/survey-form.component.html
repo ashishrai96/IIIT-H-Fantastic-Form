@@ -1,5 +1,5 @@
 <div class="tab" *ngIf="showTab">
-    <div *ngIf="showQuestion" class="tab-title" routerLink="questions" routerLinkActive="active">Questions</div>
-    <div *ngIf="!showQuestion" class="tab-title" routerLink="responses/12" routerLinkActive="active">Responses</div>
+    <div *ngIf="showQuestion" class="tab-title"  routerLinkActive="active">Questions</div>
+    <div *ngIf="showResponse" class="tab-title"  routerLinkActive="active">Responses</div>
 </div>
 <router-outlet></router-outlet>

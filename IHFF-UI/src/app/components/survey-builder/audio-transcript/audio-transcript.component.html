@@ -1,11 +1,10 @@
 <div class="audio-trans">
-    <h3 class="heading">Audio Transcript</h3>
+    <div class="heading">Audio Transcript</div>
     
     <div class="form-group"> 
-        <p-fileUpload url="" name="myfile[]" [customUpload]="true" (uploadHandler)="myUploader($event)"></p-fileUpload>
-    </div>
-    <div class="form-group">
-        <input type="text"  placeholder="Description" name="description" [(ngModel)] = "description">
+        <p-fileUpload name="file[]" 
+            [customUpload]="true" accept=".mp3"
+            (uploadHandler)="myUploader($event)"></p-fileUpload>
     </div>
     
     <div  class="transcript" >

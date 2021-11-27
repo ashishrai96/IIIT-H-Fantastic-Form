@@ -35,6 +35,10 @@
         display: flex;
         justify-content: center;
 
+        p-dataView {
+            flex: 1;
+        }
+
         .graph-container {
             &.pie {
                 width: 40%;

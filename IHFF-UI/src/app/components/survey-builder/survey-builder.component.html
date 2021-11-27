@@ -13,11 +13,15 @@
     </div>
     <div class="nav-bar">
       <div class="nav-grp">
-        <div class="nav-item" routerLink="signup" routerLinkActive="active">Sign Up</div>
-        <div class="nav-item" routerLink="login" routerLinkActive="active">Login</div>
-        <div class="nav-item" routerLink="form/questions" routerLinkActive="active">Survey Form</div>
-        <div class="nav-item" routerLink="form/transcript" routerLinkActive="active">Transcript</div>
-        <div class="nav-item" routerLink="form/dashboard" routerLinkActive="active">Dashboard</div>
+        <ng-container *ngIf="!isLoggedIn else navbtn">
+          <div class="nav-item" routerLink="signup" routerLinkActive="active" *ngIf="!isLoggedIn">Sign Up</div>
+          <div class="nav-item" routerLink="login" routerLinkActive="active" *ngIf="!isLoggedIn">Login</div>
+        </ng-container>
+        <ng-template #navbtn>
+          <div class="nav-item" routerLink="form/dashboard" routerLinkActive="active">Dashboard</div>
+          <!-- <div class="nav-item" routerLink="form/questions" routerLinkActive="active">Survey Form</div> -->
+          <div class="nav-item" routerLink="form/transcript" routerLinkActive="active">Transcript</div>
+        </ng-template>
       </div>
       <div class="action-grp">
         <ng-container *ngIf="showActionGroup">

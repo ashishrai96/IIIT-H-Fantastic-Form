@@ -12,6 +12,8 @@ import { LoaderComponent } from './components/loader/loader.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import {FileUploadModule} from 'primeng/fileupload';
 import {ToastModule} from 'primeng/toast';
+import {DataViewModule} from 'primeng/dataview';
+
 
 @NgModule({
   declarations: [
@@ -29,7 +31,8 @@ import {ToastModule} from 'primeng/toast';
     OrderListModule,
     ChartModule,
     FileUploadModule,
-    ToastModule
+    ToastModule,
+    DataViewModule
   ],
   exports: [
     AvatarModule,
@@ -42,7 +45,8 @@ import {ToastModule} from 'primeng/toast';
     ChartModule,
     LoaderComponent,
     FileUploadModule,
-    ToastModule
+    ToastModule,
+    DataViewModule
   ]
 })
 export class SharedModule { }

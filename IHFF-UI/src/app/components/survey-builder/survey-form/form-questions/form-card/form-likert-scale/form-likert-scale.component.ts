@@ -31,7 +31,7 @@ export class FormLikertScaleComponent implements OnInit, ControlValueAccessor {
   }
 
   ngOnInit(): void {
-    setTimeout(() => { this.answer = new Array(this.statements.length).fill(''); }, 0);
+    setTimeout(() => { this.answer = new Array(this.statements.length).fill(null); }, 0);
   }
 
   onAnswerChange() {

@@ -4,6 +4,8 @@ import { LoaderService } from 'src/app/shared/components/loader/loader.service';
 import { Constants } from 'src/app/shared/models/constants.model';
 import { FormElement } from 'src/app/shared/models/form-element.model';
 import { SurveyBuilderService } from '../../survey-builder.service';
+import * as Exceljs from "exceljs";
+import * as FileSaver from "file-saver";
 
 @Component({
   selector: 'app-form-responses',
@@ -13,9 +15,10 @@ import { SurveyBuilderService } from '../../survey-builder.service';
 export class FormResponsesComponent implements OnInit {
 
   formTitle: string = "";
-  formArray: FormElement[] = [];
+  formArray: any[] = [];
   questionArray: any[] = [];
   graph = {};
+  liveUrl: string;
 
   activeTab:number = 0;
   indivForm:FormElement;
@@ -32,6 +35,13 @@ export class FormResponsesComponent implements OnInit {
         this.loadFormResponse(params['creatorId'], params['title']);
       }
     });
+
+    let url = window.location.href;
+    this.liveUrl = url.replace("responses", "live");
+  }
+
+  goToLiveForm(){
+    window.location.href = this.liveUrl;
   }
 
   changeTab(index) {
@@ -140,8 +150,55 @@ export class FormResponsesComponent implements OnInit {
     err => {
       this.loader.stop();
     });
+  }
 
+  async exportExcel() {
+    if(this.formArray.length <= 0){
+      return;
+    }
 
+    const workbook = new Exceljs.Workbook();
+    workbook.created = new Date();
+    workbook.modified = new Date();
+
+    const sheet = workbook.addWorksheet('Responses');
+    sheet.columns = [];
+    this.formArray[0].items.forEach((ques, idx) => {
+      sheet.columns = [
+        ...sheet.columns,
+        { header: ques.question,
+          key: String(ques.questionId),
+          width: 40,
+          outlineLevel: 1,
+          font: { bold: true, color: { argb: '34808f0f' } }
+        },
+      ];
+    });
+
+    // worksheet.addRow({id: 1, name: 'John Doe', dob: new Date(1970,1,1)});
+    this.formArray.forEach((form: any) => {
+      let items:FormElement[] = form.items;
+      let resp = {};
+      items.forEach(quest => {
+        let ans = quest.answer;
+        if(Array.isArray(quest.answer)){
+          ans = "";
+          quest.answer.forEach(a => { ans += a+", " });
+          ans = ans.substr(0, ans.length-2);
+        }
+        resp = {
+          ...resp,
+          [quest.questionId]: ans
+        }
+      });
+      sheet.addRow({...resp});
+    });
+
+    let blobType: string = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8";
+    workbook.xlsx.writeBuffer().then(data => {
+      const blob = new Blob([data], { type: blobType }); 
+      FileSaver.saveAs(blob, this.formTitle+" Responses");
+     });
 
   }
 

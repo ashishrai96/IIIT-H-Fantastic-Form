@@ -13,7 +13,8 @@ export const environment = {
     getAllForm: "getforms",
     getFormResponse: "response",
     getForm: "form",
-    submitForm: "form"
+    submitForm: "form",
+    transcript: "uploader"
   }
 };
 

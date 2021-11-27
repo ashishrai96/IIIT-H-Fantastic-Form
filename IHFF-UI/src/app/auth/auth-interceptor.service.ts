@@ -1,8 +1,8 @@
-import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
+import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse, HttpStatusCode } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { catchError } from "rxjs/operators";
+import { Observable, throwError } from 'rxjs';
+import { catchError, map } from "rxjs/operators";
 import { AuthService } from './auth.service';
 
 @Injectable()
@@ -20,6 +20,16 @@ export class AuthInterceptor implements HttpInterceptor {
       });
     }
 
-    return next.handle(req);
+    return next.handle(req).pipe(
+      map(event => {
+        return event;
+      }),
+      catchError((errorEvent: HttpErrorResponse, _:Observable<HttpEvent<any>>) => {
+        if(errorEvent.status == HttpStatusCode.Unauthorized){
+          this.authService.logoutUser();
+          this.router.navigateByUrl("/survey/login");
+        }
+        return throwError(errorEvent);
+      }));
   }
 }

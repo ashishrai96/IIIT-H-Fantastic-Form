@@ -13,20 +13,26 @@
                 </div>
             </ng-container>
             <ng-container *ngIf="value.type == constants.FORM_ELEM_TEXT_OPTION">
-                
+                <p-dataView [value]="graphData" [paginator]="true" [rows]="10">
+                    <ng-template let-ans pTemplate="listItem">
+                        <div>
+                            {{ans}}
+                        </div>
+                    </ng-template>
+                </p-dataView>
             </ng-container>
             <ng-container *ngIf="value.type == constants.FORM_ELEM_LIKER_SCALE_OPTION">
                 <div class="graph-container stack">
                     <p-chart type="bar" [data]="stackedData" [options]="stackedOptions"></p-chart>
                 </div>
             </ng-container>
-            <ng-container *ngIf="value.type == constants.FORM_ELEM_TEXT_OPTION">
+            <!-- <ng-container *ngIf="value.type == constants.FORM_ELEM_TEXT_OPTION">
                 <div class="text-group">
                     <div class="text-answer" *ngFor="let ans of graphData">
                         {{ ans }}
                     </div>
                 </div>
-            </ng-container>
+            </ng-container> -->
         </div>
     </div>
 </div>

@@ -10,6 +10,7 @@ export class SurveyFormComponent implements OnInit {
   
   showTab: boolean = true;
   showQuestion: boolean = true;
+  showResponse: boolean = true;
 
   constructor(private router: Router) { }
 
@@ -40,6 +41,12 @@ export class SurveyFormComponent implements OnInit {
     }
     else{
       this.showQuestion = false;
+    }
+    if(url.indexOf("responses") >= 0){
+      this.showResponse = true;
+    }
+    else{
+      this.showResponse = false;
     }
   }
 

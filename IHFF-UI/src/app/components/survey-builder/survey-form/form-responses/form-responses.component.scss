@@ -19,6 +19,17 @@
 
 .form-title {
     padding: 20px 15px;
+
+    .live-info {
+        color: #53565a;
+        font-weight: 700;
+
+        span.url {
+            color: #34808f;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+    }
 }
 
 .form-container {
@@ -36,7 +47,7 @@
     display: flex;
     justify-content: space-between;
     padding: 10px 20px;
-
+    flex-direction: row-reverse;
 
     .nav-ctrl {
         background-color: #efefef;
@@ -77,5 +88,18 @@
 
     .export i {
         margin: 0px 5px;
+    }
+}
+
+.no-resp.ng-star-inserted {
+    color: #53565a;
+    padding: 15px;
+    margin: 10px;
+    font-weight: 700;
+    font-size: 20px;
+
+    i{
+        font-size: 25px;
+        vertical-align: bottom;
     }
 }

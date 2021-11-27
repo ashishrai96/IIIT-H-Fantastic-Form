@@ -7,14 +7,16 @@
   .login-form{
     border-color: #34808f;
     border-radius: 10px;
-    border-width: 0px 4px;
+    border-width: 0px 0px 0px 4px;
     border-style: solid;
     margin: 0px 15px;
+    box-shadow: -2px -2px 7px #ccc;
     
     .heading{
       font-size: 36px;
       font-weight: 700;
       margin: 10px 10px;
+      color: #53565a;
     }
     
     .form-group{
