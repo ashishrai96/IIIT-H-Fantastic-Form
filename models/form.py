@@ -6,6 +6,7 @@ class FormModel(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     url = db.Column(db.String(500), nullable=False)
     title=db.Column(db.String(80),nullable=False)
+    active=db.Column(db.Boolean, nullable=False)
     creator_id = db.Column(db.Integer, db.ForeignKey('users.id',ondelete="CASCADE"), nullable=False)
     questions = db.relationship('QuestionModel',cascade="all,delete" , backref = 'parentform')
     response=db.relationship('ResponseModel',cascade="all,delete" , backref ='parent_form')
@@ -14,9 +15,10 @@ class FormModel(db.Model):
     def __init__(self, url, title):
         self.url = url
         self.title=title
+        self.active=True
 
     def json(self):
-        return {'url': self.url, 'creator_id': self.creator_id}
+        return {'url': self.url, 'creator_id': self.creator_id, 'active':self.active}
 
     @classmethod
     def find_by_id(cls, id):

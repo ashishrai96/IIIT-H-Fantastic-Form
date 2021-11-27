@@ -13,6 +13,7 @@ class QuestionModel(db.Model):
     form_id = db.Column(db.Integer, db.ForeignKey('form.id',ondelete="CASCADE"), nullable=False)
     options=db.relationship('OptionModel',cascade="all,delete" , backref = 'ques_detail')
     response=db.relationship('ResponseModel',cascade="all,delete" , backref ='ques_detail')
+    statements = db.relationship('StatementModel', cascade="all,delete", bakref = 'ques_detail')
 
     def __init__(self,question, description, qtype, required,form_id):
         self.question=question

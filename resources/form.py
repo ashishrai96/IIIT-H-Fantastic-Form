@@ -56,4 +56,11 @@ class AddForm(Resource):
         return form.json(), 201
 
 
+class DeactivateForm(Resource):
+    @jwt_required
+    def post(_id, _title):
+        form = FormModel.query.filter_by(title = _title, creator_id = _id).first()
+        form.active = False
+        FormModel.save_to_db(form)
+        return {"message":"Form Deactivated", "status":200}
 

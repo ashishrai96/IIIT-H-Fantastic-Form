@@ -38,7 +38,8 @@ def get_form_structure(_id,_title):
     formPayload = {
         "title" : _title,
         "formId" : form.id,
-        "items" : items
+        "items" : items,
+        "active" : form.active
     }
     return formPayload
 
