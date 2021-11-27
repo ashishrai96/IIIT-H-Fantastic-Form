@@ -57,13 +57,18 @@ def Audio_to_Transcript():
 
     os.chdir('..')
     f.close()
-    shutil.rmtree(os.getcwd() + "\\" + folder_name)
+    shutil.rmtree(os.getcwd() + "/" + folder_name)
     os.remove("test.mp3")
     os.remove("transcript.wav")
 
 class Transcipt(Resource):
     @jwt_required()
-    def post():
+    def post(self):
+        if 'file' not in request.files:
+            data = {
+            500 : "Audio could not be Transcribed. Faulty Audio. Please Try Again."
+            }
+            return data
         f = request.files['file']
         codec = f.filename[-4:]
         f.filename = "test" + codec
