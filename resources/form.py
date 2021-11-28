@@ -64,3 +64,13 @@ class DeactivateForm(Resource):
         FormModel.save_to_db(form)
         return {"message":"Form Deactivated", "status":200}
 
+
+class DeleteForm(Resource):
+    @jwt_required()
+    def post(self, _id, _title):
+        user = UserModel.find_by_id(get_jwt_identity())
+        if user.id == _id:
+            form = FormModel.query.filter_by(title= _title,creator_id = _id).first()
+            FormModel.delete_from_db(form)
+            return {"message": "form deleted", "status" : 200}
+        return {"message": "You're not the creator of form", "status": 400}

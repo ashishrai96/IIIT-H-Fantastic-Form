@@ -112,4 +112,3 @@ class GetForms(Resource):
             res.append(result)
         
         return {"forms":res, "status":200}
-            
