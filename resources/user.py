@@ -2,7 +2,7 @@ from flask_restful import Resource, reqparse
 from flask import make_response
 from models.user import UserModel
 from models.form import FormModel
-from werkzeug.security import safe_str_cmp
+from werkzeug.security import safe_str_cmp, generate_password_hash, check_password_hash
 from flask_jwt_extended import set_access_cookies, create_access_token, jwt_required, unset_jwt_cookies, get_jwt_identity
 
 
@@ -35,8 +35,10 @@ class UserRegister(Resource):
         if UserModel.query.filter_by(username = data['username']).first():
             return {"message": "A user with that username already exists.", "status":500}
 
+        hash_value = generate_password_hash(data['password'], method="sha3_256")
+        print(hash_value)
         user = UserModel(data['username'], 
-                         data['password'],
+                         hash_value,
                          data['firstname'],
                          data['lastname'])
         user.save_to_db()
@@ -69,7 +71,7 @@ class UserLogin(Resource):
     def post(self):
         data = UserLogin.parser.parse_args()
         user = UserModel.query.filter_by(username = data['username']).first()
-        if user and safe_str_cmp(data['password'], user.password):
+        if user and check_password_hash(user.password, data['password']):
             formPayload = [{x.title: x.url} for x in FormModel.query.filter_by(creator_id = user.id)]
             print(formPayload)
             
