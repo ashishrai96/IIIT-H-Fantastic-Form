@@ -10,7 +10,7 @@
             </ng-template>
         </th>
         <th *ngIf="editMode">
-            <button class="btn primary" (click)="addChoices()"><i class="pi pi-plus"></i></button>
+            <button pRipple class="btn primary" (click)="addChoices()"><i class="pi pi-plus"></i></button>
         </th>
     </thead>
     <tbody>
@@ -31,7 +31,7 @@
             </td>
         </tr>
         <tr *ngIf="editMode">
-            <td><button class="btn primary" (click)="addStatement()"><i class="pi pi-plus"></i></button></td>
+            <td><button pRipple class="btn primary" (click)="addStatement()"><i class="pi pi-plus"></i></button></td>
             <td [attr.colspan]="choices.length"></td>
         </tr>
     </tbody>

@@ -9,15 +9,15 @@
         <span class="indicator" [ngStyle]="{'color':(formActive)?'#22e900':'#fd1212'}">
             <i class="pi pi-circle-on"></i>
         </span>
-        Live at: 
+        URL: 
         <span class="url" (click)="goToLiveForm()">{{ liveUrl }}</span>
     </div>
 </div>
 <ng-container *ngIf="formArray?.length>0 else noRespTemplate">
     <div class="form-nav">
         <div class="btn-grp">
-            <button class="btn secondary deactivate" (click)="deactivateForm()" *ngIf="formActive"><i class="pi pi-ban"></i>Deactivate</button>
-            <button class="btn primary export" (click)="exportExcel()"><i class="pi pi-file-excel"></i>Export</button>
+            <button pRipple class="btn secondary deactivate" (click)="deactivateForm()" *ngIf="formActive"><i class="pi pi-ban"></i>Deactivate</button>
+            <button pRipple class="btn primary export" (click)="exportExcel()"><i class="pi pi-file-excel"></i>Export</button>
         </div>
         <div class="nav-ctrl" *ngIf="activeTab==1">
             <span [ngClass]="{'disabled': currentIndex==0}" class="key left-key" (click)="loadIndividualForm(currentIndex-1)">
@@ -42,7 +42,7 @@
                 <app-form-card [value]="val" [index]="index" [allowEdit]="false" [readonly]="readonly"></app-form-card>
             </div>
             <div class="submit" *ngIf="!readonly">
-                <button class="btn primary" (click)="submitResponse()">Submit</button>
+                <button pRipple class="btn primary" (click)="submitResponse()">Submit</button>
             </div>
         </div>
     </ng-container>

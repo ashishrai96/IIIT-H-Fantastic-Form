@@ -66,6 +66,9 @@ export class FormLiveComponent implements OnInit {
           }
         }
       }
+      else{
+        elem.answer = ''
+      }
     }
 
     return 0;
@@ -73,9 +76,9 @@ export class FormLiveComponent implements OnInit {
 
   submitResponse(){
     console.log("To submit = ", this.formData);
-
-    let isvalid = this.validateForm(this.formData);
     
+    let isvalid = this.validateForm(this.formData);
+
     if(isvalid == -1){
       this.messageService.add({
         severity: 'error',

@@ -72,7 +72,7 @@
                             name="answer" [value]="choice" [label]="choice" [(ngModel)]="value.answer" [disabled]="readonly"></p-radioButton>
                     </ng-template>
                 </ng-template>
-                <button class="btn primary" *ngIf="value.editMode" (click)="onAddNewChoice()">Add Choice</button>
+                <button pRipple class="btn primary" *ngIf="value.editMode" (click)="onAddNewChoice()">Add Choice</button>
             </ng-container>
             <ng-container *ngIf="value.type == constants.FORM_ELEM_LIKER_SCALE_OPTION">
                 <app-form-likert-scale [editMode]="value.editMode" [statements]="value.statements" [(ngModel)]="value.answer" name="answer" ngDefaultControl

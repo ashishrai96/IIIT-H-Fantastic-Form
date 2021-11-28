@@ -14,26 +14,25 @@
     <div class="nav-bar">
       <div class="nav-grp">
         <ng-container *ngIf="!isLoggedIn else navbtn">
-          <div class="nav-item" routerLink="signup" routerLinkActive="active" *ngIf="!isLoggedIn">Sign Up</div>
-          <div class="nav-item" routerLink="login" routerLinkActive="active" *ngIf="!isLoggedIn">Login</div>
+          <div pRipple class="nav-item" routerLink="signup" routerLinkActive="active" *ngIf="!isLoggedIn">Sign Up</div>
+          <div pRipple class="nav-item" routerLink="login" routerLinkActive="active" *ngIf="!isLoggedIn">Login</div>
         </ng-container>
         <ng-template #navbtn>
-          <div class="nav-item" routerLink="form/dashboard" routerLinkActive="active">Dashboard</div>
-          <!-- <div class="nav-item" routerLink="form/questions" routerLinkActive="active">Survey Form</div> -->
-          <div class="nav-item" routerLink="form/transcript" routerLinkActive="active">Transcript</div>
+          <div pRipple class="nav-item" routerLink="form/dashboard" routerLinkActive="active">Dashboard</div>
+          <div pRipple class="nav-item" routerLink="form/transcript" routerLinkActive="active">Transcript</div>
         </ng-template>
       </div>
       <div class="action-grp">
         <ng-container *ngIf="showActionGroup">
           <div class="action-item">
-            <button class="btn secondary" (click)="togglePreview()">{{ preview?'Go Back' : 'Preview'}}</button>
+            <button pRipple class="btn secondary" (click)="togglePreview()">{{ preview?'Go Back' : 'Preview'}}</button>
           </div>
           <div class="action-item">
-            <button class="btn primary" (click)="publishForm()">Publish</button>
+            <button pRipple class="btn primary" (click)="publishForm()">Publish</button>
           </div>
         </ng-container>
         <div class="action-item" *ngIf="isLoggedIn">
-          <button class="btn primary" (click)="logoutUser()">Logout</button>
+          <button pRipple class="btn primary" (click)="logoutUser()">Logout</button>
         </div>
       </div>
     </div>

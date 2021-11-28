@@ -1,7 +1,7 @@
 <div class="box">
     <div class="heading">Create Form</div>
     <div class="form-group">
-        <div class = "fileIcon" (click)="createForm()">
+        <div pRipple class = "fileIcon" (click)="createForm()">
             <i class="pi pi-file"></i>
             <div class="desc">Create</div>
         </div>
@@ -16,7 +16,7 @@
     </ng-container>
     <ng-template #dataTemplate>
         <div class="form-group">
-            <div class = "fileIcon" *ngFor="let form of data" (click)="openForm(form)">
+            <div pRipple class = "fileIcon" *ngFor="let form of data" (click)="openForm(form)">
                 <i class="pi pi-file"></i>
                 <div class="desc">{{form.formTitle}}</div>
             </div>
