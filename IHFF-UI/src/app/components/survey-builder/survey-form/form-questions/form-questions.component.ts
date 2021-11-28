@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoaderService } from 'src/app/shared/components/loader/loader.service';
 import { Constants } from 'src/app/shared/models/constants.model';
@@ -7,13 +7,14 @@ import { SurveyBuilderDataExchangeService } from '../../survey-builder-data-exch
 import { SurveyBuilderService } from '../../survey-builder.service';
 import * as _ from 'lodash';
 import { MessageService } from 'primeng/api';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-form-questions',
   templateUrl: './form-questions.component.html',
   styleUrls: ['./form-questions.component.scss']
 })
-export class FormQuestionsComponent implements OnInit {
+export class FormQuestionsComponent implements OnInit, OnDestroy {
 
   formArray: FormElement[] = [];
   formTitle: string = '';
@@ -22,10 +23,18 @@ export class FormQuestionsComponent implements OnInit {
   allowEdit: boolean = true;
   preview: boolean = false;
   private isLive: boolean = false;
+  ListenerSubs: Subscription;
 
   constructor(private router: Router, private messageService: MessageService,
     private surveyDataExchnage: SurveyBuilderDataExchangeService, 
     private surveyService: SurveyBuilderService, private loader: LoaderService) { }
+  
+  
+  ngOnDestroy(): void {
+    if(this.ListenerSubs){
+      this.ListenerSubs.unsubscribe();
+    }
+  }
 
   ngOnInit(): void {
     this.surveyDataExchnage.getPreview().subscribe((preview:boolean) => {
@@ -34,7 +43,7 @@ export class FormQuestionsComponent implements OnInit {
       this.formArray = [ ...this.formArray ];
     });
     
-    this.surveyDataExchnage.listenPublishEvent().subscribe(() => {
+    this.ListenerSubs = this.surveyDataExchnage.listenPublishEvent().subscribe(() => {
       this.publishForm();
     });
   }
