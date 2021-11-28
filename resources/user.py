@@ -112,3 +112,10 @@ class GetForms(Resource):
             res.append(result)
         
         return {"forms":res, "status":200}
+
+class DeleteUser(Resource):
+    @jwt_required()
+    def post(self):
+        user= UserModel.find_by_id(get_jwt_identity())
+        user.delete_from_db()
+        return {"message": "user deleted", "status" : 200}

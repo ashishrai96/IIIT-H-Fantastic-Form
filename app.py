@@ -5,7 +5,7 @@ from flask_jwt_extended import JWTManager
 
 import datetime
 
-from resources.user import Test, UserLogin, UserRegister, UserLogout,GetForms
+from resources.user import Test, UserLogin, UserRegister, UserLogout,GetForms,DeleteUser
 from resources.form import AddForm, DeactivateForm, DeleteForm
 from resources.response import AddResponse, GetResponse
 from resources.question import QuestionList, Question
@@ -36,7 +36,7 @@ def create_tables():
 api.add_resource(UserRegister, '/register')
 api.add_resource(UserLogin, '/login')
 api.add_resource(UserLogout, '/logout')
-#api.add_resource(DeleteUser, '/deleteUser')
+api.add_resource(DeleteUser, '/deleteUser')
 api.add_resource(AddForm, '/addform')
 api.add_resource(AddResponse,'/form/<int:_id>/<string:_title>')
 api.add_resource(Transcipt, '/uploader')
