@@ -15,7 +15,9 @@ export const environment = {
     getForm: "form",
     submitForm: "form",
     transcript: "uploader",
-    deactivate: "deactivate"
+    deactivate: "deactivate",
+    deleteFrom: "delete",
+    deleteUser: "deleteUser"
   }
 };
 

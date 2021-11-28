@@ -24,6 +24,28 @@
                 height: 60px;
             }
         }
+
+        .action-center{
+            p-avatar{
+                cursor: pointer;
+            }
+
+            .option {
+                position: absolute;
+                background-color: #fff;
+                right: 0;
+                margin: 5px;
+                padding: 5px 10px;
+                z-index: 10;
+                box-shadow: 1px 2px 5px #666;
+                color: #53565a;
+
+                &:hover {
+                    background-color: #b2d8ea;
+                    cursor: pointer;
+                }
+            }
+        }
     }
 
     .nav-bar {

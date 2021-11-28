@@ -24,4 +24,8 @@ export class LoginService {
   logout(){
     return this.http.post(environment.baseUrl + environment.api.logout, {});
   }
+
+  deleteUser(){
+    return this.http.post(environment.baseUrl + environment.api.deleteUser, {});
+  }
 }

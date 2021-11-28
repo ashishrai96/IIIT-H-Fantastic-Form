@@ -67,7 +67,9 @@ export class FormLiveComponent implements OnInit {
         }
       }
       else{
-        elem.answer = ''
+        if(!elem.answer || elem.answer.length == 0){
+          elem.answer = ''
+        }
       }
     }
 

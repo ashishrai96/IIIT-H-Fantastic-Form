@@ -7,7 +7,10 @@
       <div class="title">Survey Builder</div>
       <div class="action-center">
         <div class="avatar" *ngIf="userLabel">
-          <p-avatar [label]="userLabel" shape="circle"></p-avatar>
+          <p-avatar [label]="userLabel" shape="circle" (click)="showOption = !showOption"></p-avatar>
+          <div class="option" *ngIf="showOption">
+            <div class="optn-item" (click)="deleteUser()">Delete Account</div>
+          </div>
         </div>
       </div>
     </div>
