@@ -1,0 +1,28 @@
+input[type="text"],
+input[type="number"],
+input[type=password],
+input[type=email],
+textarea {
+    width: 100%;
+    padding: 5px 10px;
+    border-radius: 0px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+input {
+    height: 34px;
+}
+
+textarea{
+    font-family: Arial;
+}
+
+input[type="text"]:focus-visible,
+input[type="number"]:focus-visible,
+input[type=password]:focus-visible,
+input[type=email]:focus-visible,
+textarea:focus-visible {
+    outline: none;
+    border: 1px solid #34808f;
+}

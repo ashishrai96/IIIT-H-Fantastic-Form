@@ -1,0 +1,23 @@
+/* You can add global styles to this file, and also import other style files */
+@import 'assets/scss/inputs.scss';
+@import 'assets/scss/button.scss';
+@import 'assets/scss/p-avatar.scss';
+@import 'assets/scss/p-togglebutton.scss';
+@import 'assets/scss/p-dropdown.scss';
+@import 'assets/scss/p-inputswitch.scss';
+@import 'assets/scss/p-radio-check.scss';
+@import 'assets/scss/p-orderlist.scss';
+@import 'assets/scss/p-dataview.scss';
+
+body{
+    margin: 0;
+    font-family: Arial;
+}
+
+*:focus {
+    box-shadow: none !important;
+}
+
+*.p-focus {
+    box-shadow: none !important;
+}

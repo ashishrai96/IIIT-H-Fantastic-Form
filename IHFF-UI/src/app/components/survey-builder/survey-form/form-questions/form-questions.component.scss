@@ -1,0 +1,33 @@
+.form-title {
+    padding: 20px 15px;
+
+    input {
+        font-size: 36px;
+        padding: 5px 10px;
+        height: auto;
+    }
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: space-evenly;
+
+    .form-control {
+        padding: 10px 15px;
+    }
+}
+
+.btn-group {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px 0px 20px;
+
+    i {
+        margin: 0px 5px;
+        font-size: 12px;
+        font-weight: 700;
+    }
+}

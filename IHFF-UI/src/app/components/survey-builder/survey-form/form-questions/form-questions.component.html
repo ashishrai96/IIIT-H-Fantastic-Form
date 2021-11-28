@@ -1,0 +1,25 @@
+<div class="form-title">
+    <input *ngIf="allowEdit" type="text" [(ngModel)]="formTitle" placeholder="Enter Title" />
+    <h1 *ngIf="!allowEdit">{{ formTitle }}</h1>
+</div>
+<div class="form-container">
+    <div class="form-control" *ngFor="let val of formArray;let index=index">
+        <app-form-card [value]="val" [index]="index" [allowEdit]="allowEdit" (onDelete)="onDelete(index)" (onClone)="onClone(index)"></app-form-card>
+    </div>
+</div>
+<div class="btn-group">
+    <ng-container *ngIf="allowEdit else submitBtn">
+        <button pRipple class="btn primary" (click)="AddNewElement(constants.FORM_ELEM_CHOICE_OPTION)">
+            <i class="pi pi-plus"></i>Choice
+        </button>
+        <button pRipple class="btn primary" (click)="AddNewElement(constants.FORM_ELEM_TEXT_OPTION)">
+            <i class="pi pi-plus"></i>Text
+        </button>
+        <button pRipple class="btn primary" (click)="AddNewElement(constants.FORM_ELEM_LIKER_SCALE_OPTION)">
+            <i class="pi pi-plus"></i>Liker Scale
+        </button>
+    </ng-container>
+    <ng-template #submitBtn>
+        
+    </ng-template>
+</div>

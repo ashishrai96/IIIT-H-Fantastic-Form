@@ -1,0 +1,58 @@
+<div class="tab">
+    <div class="tab-title" [ngClass]="{'active': activeTab==0}" (click)="changeTab(0)">Summary</div>
+    <div class="tab-title" [ngClass]="{'active': activeTab==1}" (click)="changeTab(1)">Individual</div>
+</div>
+
+<div class="form-title">
+    <h1>{{ formTitle }}</h1>
+    <div class="live-info">
+        <div class="url">
+            <span class="indicator" [ngStyle]="{'color':(formActive)?'#22e900':'#fd1212'}">
+                <i class="pi pi-circle-on"></i>
+            </span>
+            URL: 
+            <span class="url" (click)="goToLiveForm()">{{ liveUrl }}</span>
+        </div>
+        <button pRipple class="btn secondary deactivate" (click)="deleteForm()"><i class="pi pi-ban"></i>Delete</button>
+    </div>
+</div>
+<ng-container *ngIf="formArray?.length>0 else noRespTemplate">
+    <div class="form-nav">
+        <div class="btn-grp">
+            <button pRipple class="btn secondary deactivate" (click)="deactivateForm()" *ngIf="formActive"><i class="pi pi-ban"></i>Deactivate</button>
+            <button pRipple class="btn primary export" (click)="exportExcel()"><i class="pi pi-file-excel"></i>Export</button>
+        </div>
+        <div class="nav-ctrl" *ngIf="activeTab==1">
+            <span [ngClass]="{'disabled': currentIndex==0}" class="key left-key" (click)="loadIndividualForm(currentIndex-1)">
+                <i class="pi pi-chevron-left"></i>
+            </span>
+            <label>Respondent: </label>
+            <span class="number-box">{{ currentIndex+1 }}</span>
+            <span [ngClass]="{'disabled': currentIndex==(formArray.length-1)}" class="key right-key" (click)="loadIndividualForm(currentIndex+1)"><i class="pi pi-chevron-right"></i></span>
+        </div>
+    </div>
+    <ng-container *ngIf="activeTab==0">
+        <div class="form-container">
+            <div class="form-control" *ngFor="let val of questionArray;let index=index">
+                <app-form-response-card [graphData]="graph[index]?graph[index]:''" [value]="val" 
+                    [index]="index"></app-form-response-card>
+            </div>
+        </div>
+    </ng-container>
+    <ng-container *ngIf="activeTab==1">
+        <div class="form-container">
+            <div class="form-control" *ngFor="let val of indivForm.items; let index=index">
+                <app-form-card [value]="val" [index]="index" [allowEdit]="false" [readonly]="readonly"></app-form-card>
+            </div>
+            <div class="submit" *ngIf="!readonly">
+                <button pRipple class="btn primary" (click)="submitResponse()">Submit</button>
+            </div>
+        </div>
+    </ng-container>
+</ng-container>
+<ng-template #noRespTemplate>
+    <div class="no-resp">
+        <i class="pi pi-info-circle"></i>
+        No response has been recorded yet.
+    </div>
+</ng-template>

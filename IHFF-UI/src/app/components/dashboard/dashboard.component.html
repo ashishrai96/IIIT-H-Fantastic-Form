@@ -1,0 +1,25 @@
+<div class="box">
+    <div class="heading">Create Form</div>
+    <div class="form-group">
+        <div pRipple class = "fileIcon" (click)="createForm()">
+            <i class="pi pi-file"></i>
+            <div class="desc">Create</div>
+        </div>
+    </div>
+</div>
+<div class="box">
+    <div class="heading">Your forms</div>
+    <ng-container *ngIf="data?.length == 0 else dataTemplate">
+        <div class="empty-message">
+            No record found.
+        </div>
+    </ng-container>
+    <ng-template #dataTemplate>
+        <div class="form-group">
+            <div pRipple class = "fileIcon" *ngFor="let form of data" (click)="openForm(form)">
+                <i class="pi pi-file"></i>
+                <div class="desc">{{form.formTitle}}</div>
+            </div>
+        </div>
+    </ng-template>
+</div>

@@ -1,0 +1,25 @@
+
+.audio-trans{
+    border-left: 4px solid #34808f;
+    border-radius: 10px;
+    overflow: hidden;
+
+    .heading{
+        margin-left: 30%;
+        font-size: 2rem;
+    }
+    .form-group{
+        padding: 10px 15px;
+        background-color: #34808f1f;
+        
+    }
+    .transcript{
+        padding: 10px 15px;
+        background-color: #34808f1f;
+
+        .sub_heading{
+            font-size: 1.2rem;
+            margin-left: 5%;
+        }
+    }
+}

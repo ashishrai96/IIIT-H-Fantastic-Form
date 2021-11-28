@@ -1,0 +1,159 @@
+.card {
+
+    &.edit-mode {
+        border-left: 4px solid #34808f;
+        border-radius: 10px;
+    }
+
+    .card-container {
+        padding: 10px 15px;
+        background-color: #34808f1f;
+        border-radius: 10px;
+
+        .question-label {
+            padding: 5px 0px;
+            font-size: 16px;
+            color: #53565a;
+
+            .question-number {
+                display: inline;
+                margin-right: 5px;
+            }
+
+            .mandatory::after {
+                content: '*';
+                font-size: 20px;
+                vertical-align: middle;
+                margin: 0px 5px;
+                color: #e54343;
+                font-family: 'primeicons';
+            }
+        }
+
+        .question-input {
+            display: flex;
+            align-items: stretch;
+            
+            .img-btn {
+                display: flex;
+                align-items: center;
+                padding: 5px 10px;
+                background-color: #34808f;
+                color: #efefef;
+                cursor: pointer;
+            }
+            .img-btn:hover {
+                background-color: #2ca5bc;
+            }
+        }
+
+        .description {
+            padding: 5px 5px;
+            color: #888;
+            font-size: 14px;
+        }
+
+        .answer-body {
+            padding: 10px 0px;
+
+            .txt-answer {
+                padding: 5px 10px;
+                color: #53565a;
+            }
+
+            .readonly-choice {
+                padding: 5px 0px;
+                width: 100%;
+            }
+
+            .choice-item {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                .drag-icon {
+                    display: flex;
+                    i:first-child {
+                        margin-right: -10px;
+                    }
+                }
+
+                .delete-icon {
+                    padding: 10px;
+                    cursor: pointer;
+
+                    &.disabled {
+                        color: #97999b;
+                        cursor: default;
+                    }
+                }
+            }
+
+            .clear-action {
+                margin: 15px 0px 0px 10px;
+                
+                span {
+                    font-size: 14px;
+                    color: #34808f;
+                    text-decoration: underline;
+                    cursor: pointer;
+                }
+            }
+        }
+
+        .validations {
+            padding: 10px 0px;
+            border-top: 1px solid #34808f;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+
+            label:first-child {
+                margin-right: 10px;
+            }
+
+            .text-validation {
+                display: flex;
+                align-items: center;
+
+                .validation-input {
+                    padding: 0px 15px;
+                    flex: 1;
+
+                    input {
+                        height: 34px;
+                        border-radius: 3px;
+                    }
+                }
+            }
+        }
+
+        .controls {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            padding: 10px 0px;
+            border-top: 1px solid #34808f;
+
+            span.delete-btn {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-right: 10px;
+                color: #53565a;
+                padding: 4px 10px 4px 5px;
+                cursor: pointer;
+                background-color: #fff;
+                border-radius: 4px;
+                border: 1px solid #ccc;
+
+                i{
+                    padding: 5px;
+                }
+            }
+            span.delete-btn:hover {
+                background-color: transparent;
+            }
+        }
+    }
+}

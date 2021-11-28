@@ -1,0 +1,27 @@
+.audio-trans {
+    padding: 5px 15px;
+
+    .heading{
+        font-size: 36px;
+        font-weight: 700;
+        margin: 25px 10px 50px;
+        color: #53565a;
+    }
+
+    .form-group {
+        margin: 10px 0px;
+
+        p-fileUpload .p-button {
+            background-color: #34808f;
+            border: none;
+
+            &:hover {
+                background-color: #2ca5bc;
+            }
+        }
+    }
+
+    .transcript {
+        color: #53565a;
+    }
+}

@@ -1,0 +1,118 @@
+<div class="card" [ngClass]="{'edit-mode': value.editMode}">
+    <div class="card-container" [ngClass]="{'focus': value.editMode}">
+        <div class="question-label">
+            <label [ngClass]="{'mandatory': value.required==true}" *ngIf="!value.editMode">
+                <div class="question-number" *ngIf="index!=undefined">{{ index+1 }}.</div>
+                {{ value.question }}
+            </label>
+            <div class="question-input" *ngIf="value.editMode">
+                <input type="text" placeholder="Enter Question" [(ngModel)]="value.question" />
+            </div>
+        </div>
+        <div class="description">
+            <label *ngIf="!value.editMode && value.description?.length>0">{{ value.description }}</label>
+            <textarea *ngIf="value.editMode" rows="3" placeholder="Enter Description" 
+                [(ngModel)]="value.description" [readonly]="readonly"></textarea>
+        </div>
+        <div class="answer-body">
+            <ng-container *ngIf="value.type == constants.FORM_ELEM_TEXT_OPTION">
+                <ng-container *ngIf="readonly else textInput">
+                    <div class="txt-answer"><strong>Answer:&nbsp;</strong> {{ value.answer }}</div>
+                </ng-container>
+                <ng-template #textInput>
+                    <input type="text" placeholder="Enter Answer" [disabled]="value.editMode" [(ngModel)]="value.answer" [readonly]="readonly" />
+                </ng-template>
+            </ng-container>
+            <ng-container *ngIf="value.type == constants.FORM_ELEM_CHOICE_OPTION">
+                <ng-container *ngIf="value.isMultiChoice else singleChoice">
+                    <ng-container *ngIf="value.editMode else MultiReadOnly">
+                        <p-orderList [value]="value.choices" [dragdrop]="true" (onReorder)="check()"
+                        [metaKeySelection]="false" [trackBy]="choiceTrackBy">
+                            <ng-template let-choice pTemplate="item" let-index="index">
+                                <div class="choice-item">
+                                    <div class="drag-icon">
+                                        <i class="pi pi-ellipsis-v"></i>
+                                        <i class="pi pi-ellipsis-v"></i>
+                                    </div>
+                                    <p-checkbox [disabled]="true" [(ngModel)]="dummy"></p-checkbox>
+                                    <input type="text" [(ngModel)]="value.choices[index]" placeholder="Enter Choice" />
+                                    <div class="delete-icon" (click)="onDeleteChoice(index)" [ngClass]="{'disabled': value.choices.length<=1}">
+                                        <i class="pi pi-times-circle"></i>
+                                    </div>
+                                </div>
+                            </ng-template>
+                        </p-orderList>
+                    </ng-container>
+                    <ng-template #MultiReadOnly>
+                        <p-checkbox class="readonly-choice" *ngFor="let choice of value.choices"
+                            name="answer" [value]="choice" [label]="choice" [(ngModel)]="value.answer" [readonly]="readonly"></p-checkbox>
+                    </ng-template>
+                </ng-container>
+                <ng-template #singleChoice>
+                    <ng-container *ngIf="value.editMode else SingleReadOnly">
+                        <p-orderList [value]="value.choices" [dragdrop]="true" (onReorder)="check()"
+                            [metaKeySelection]="false" [trackBy]="choiceTrackBy">
+                            <ng-template let-choice pTemplate="item" let-index="index">
+                                <div class="choice-item">
+                                    <div class="drag-icon">
+                                        <i class="pi pi-ellipsis-v"></i>
+                                        <i class="pi pi-ellipsis-v"></i>
+                                    </div>
+                                    <p-radioButton [disabled]="true" [(ngModel)]="dummy"></p-radioButton>
+                                    <input type="text" [(ngModel)]="value.choices[index]" placeholder="Enter Choice" />
+                                    <div class="delete-icon" (click)="onDeleteChoice(index)" [ngClass]="{'disabled': value.choices.length<=1}">
+                                        <i class="pi pi-times-circle"></i>
+                                    </div>
+                                </div>
+                            </ng-template>
+                        </p-orderList>
+                    </ng-container>
+                    <ng-template #SingleReadOnly>
+                        <p-radioButton [ngClass]="{'readonly': readonly}" class="readonly-choice" *ngFor="let choice of value.choices"
+                            name="answer" [value]="choice" [label]="choice" [(ngModel)]="value.answer" [disabled]="readonly"></p-radioButton>
+                    </ng-template>
+                </ng-template>
+                <button pRipple class="btn primary" *ngIf="value.editMode" (click)="onAddNewChoice()">Add Choice</button>
+            </ng-container>
+            <ng-container *ngIf="value.type == constants.FORM_ELEM_LIKER_SCALE_OPTION">
+                <app-form-likert-scale [editMode]="value.editMode" [statements]="value.statements" [(ngModel)]="value.answer" name="answer" ngDefaultControl
+                    [choices]="value.choices" [readonly]="readonly" (onAnswer)="onLikertAnswerUpdate($event)"></app-form-likert-scale>
+            </ng-container>
+            <div class="clear-action" *ngIf="!allowEdit && !readonly">
+                <span (click)="clearAnswer()" >Clear Answer</span>
+            </div>
+        </div>
+        <div class="validations" 
+            *ngIf="value.editMode 
+                && !(value.type == constants.FORM_ELEM_LIKER_SCALE_OPTION)
+                && !(value.type == constants.FORM_ELEM_TEXT_OPTION)">
+            <!-- <ng-container *ngIf="value.validations && value.type == constants.FORM_ELEM_TEXT_OPTION">
+                <div class="text-validation">
+                    <label>Validation: </label>
+                    <div class="validation-input">
+                        <p-dropdown [options]="restrictions" [(ngModel)]="rule" optionLabel="name" 
+                            (onChange)="updateValidationInfo()"></p-dropdown>
+                        </div>
+                    <div class="validation-input">
+                        <input type="number" [(ngModel)]="value.validations.value1" />
+                    </div>
+                    <div class="validation-input">
+                        <input type="number" [(ngModel)]="value.validations.value2" />
+                    </div>
+                </div>
+            </ng-container> -->
+            <ng-container *ngIf="value.type == constants.FORM_ELEM_CHOICE_OPTION">
+                <label>Rule: </label>
+                <label>Single Choice</label>
+                <p-inputSwitch [(ngModel)]="value.isMultiChoice"></p-inputSwitch>
+                <label>Multiple Choice</label>
+            </ng-container>
+        </div>
+        <div class="controls" *ngIf="value.editMode">
+            <span class="delete-btn" (click)="onCloneHandler()"><i class="pi pi-copy"></i>Clone</span>
+            <span class="delete-btn" (click)="onDeleteHandler()"><i class="pi pi-times-circle"></i>Delete</span>
+            <p-toggleButton [(ngModel)]="value.required" [onIcon]="'pi pi-check'" 
+                offIcon="pi pi-times" onLabel="Required" offLabel="Required"></p-toggleButton>
+        </div>
+    </div>
+</div>

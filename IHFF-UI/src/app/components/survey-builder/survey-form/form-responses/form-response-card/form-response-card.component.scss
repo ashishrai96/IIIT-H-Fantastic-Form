@@ -1,0 +1,63 @@
+.card {
+
+    &.edit-mode {
+        border-left: 4px solid #34808f;
+        border-radius: 10px;
+    }
+
+    .card-container {
+        padding: 10px 15px;
+        background-color: #34808f1f;
+        border-radius: 10px;
+
+        .question-label {
+            padding: 5px 0px;
+            font-size: 16px;
+            color: #53565a;
+
+            .question-number {
+                display: inline;
+                margin-right: 5px;
+            }
+
+            .mandatory::after {
+                content: '*';
+                font-size: 20px;
+                vertical-align: middle;
+                margin: 0px 5px;
+                color: #e54343;
+                font-family: 'primeicons';
+            }
+        }
+    }
+
+    .response-body {
+        display: flex;
+        justify-content: center;
+
+        p-dataView {
+            flex: 1;
+        }
+
+        .graph-container {
+            &.pie {
+                width: 40%;
+            }
+
+            &.stack {
+                flex: 1;
+            }
+        }
+
+        .text-group {
+            flex: 1;
+
+            .text-answer {
+                background-color: #fff;
+                margin: 10px;
+                padding: 5px;
+                color: #53565a;
+            }
+        }
+    }
+}

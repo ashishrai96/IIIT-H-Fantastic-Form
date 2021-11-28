@@ -1,0 +1,45 @@
+.p-orderlist {
+    .p-orderlist-controls {
+        display: none;
+    }
+
+    .p-orderlist-list {
+        background-color: transparent !important;
+        border: none !important;
+        padding: 0px !important;
+        min-height: auto !important;
+
+        .p-orderlist-item {
+            padding: 5px 0px !important;
+            
+            &.p-highlight {
+                background: transparent !important;
+            }
+        }
+
+    }
+
+}
+
+.p-orderlist-item.cdk-drag-preview {
+    height: auto !important;
+    padding: 5px !important;
+    background: #efefef !important;
+
+    .choice-item {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .drag-icon {
+            display: flex;
+            i:first-child {
+                margin-right: -10px;
+            }
+        }
+
+        .delete-icon {
+            padding: 10px;
+        }
+    }
+}

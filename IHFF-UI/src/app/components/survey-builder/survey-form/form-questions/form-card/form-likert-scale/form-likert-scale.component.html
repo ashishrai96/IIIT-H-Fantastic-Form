@@ -1,0 +1,38 @@
+<table class="likert-scale-table">
+    <thead>
+        <th></th>
+        <th *ngFor="let choice of choices; let index=index; trackBy:trackByFn">
+            <ng-container *ngIf="!editMode else editChoice">
+                {{ choice }}
+            </ng-container>
+            <ng-template #editChoice>
+                <input type="text" [(ngModel)]="choices[index]" [placeholder]="'Enter Choice '+(index+1)" />
+            </ng-template>
+        </th>
+        <th *ngIf="editMode">
+            <button pRipple class="btn primary" (click)="addChoices()"><i class="pi pi-plus"></i></button>
+        </th>
+    </thead>
+    <tbody>
+        <tr *ngFor="let stmt of statements; let index=index; trackBy:trackByFn">
+            <td>
+                <ng-container *ngIf="!editMode else editStmt">
+                    {{ stmt }}
+                </ng-container>
+                <ng-template #editStmt>
+                    <input type="text" [(ngModel)]="statements[index]" [placeholder]="'Enter Statement '+(index+1)" />
+                </ng-template>
+            </td>
+            <td *ngFor="let choice of choices">
+                <ng-container *ngIf="answer?.length>0">
+                    <p-radioButton [ngClass]="{'readonly': readonly}" [name]="'stmt'+index" [value]="choice" [(ngModel)]="answer[index]" 
+                        (onClick)="onAnswerChange()" [disabled]="editMode || readonly"></p-radioButton>
+                </ng-container>
+            </td>
+        </tr>
+        <tr *ngIf="editMode">
+            <td><button pRipple class="btn primary" (click)="addStatement()"><i class="pi pi-plus"></i></button></td>
+            <td [attr.colspan]="choices.length"></td>
+        </tr>
+    </tbody>
+</table>
