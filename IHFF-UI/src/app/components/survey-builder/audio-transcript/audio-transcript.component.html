@@ -1,0 +1,15 @@
+<div class="audio-trans">
+    <div class="heading">Audio Transcript</div>
+    
+    <div class="form-group"> 
+        <p-fileUpload name="file[]" 
+            [customUpload]="true" accept=".mp3"
+            (uploadHandler)="myUploader($event)"></p-fileUpload>
+    </div>
+    
+    <div  class="transcript" >
+        <h4 class = "sub_heading">Transcript:</h4>
+        <textarea readonly name="transcript" cols="30" rows="10">{{transcript}}</textarea>
+    </div>
+    
+</div>

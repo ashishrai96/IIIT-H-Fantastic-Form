@@ -1,0 +1,106 @@
+.tab {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+    .tab-title {
+        cursor: pointer;
+        flex: 1;
+        display: flex;
+        background-color: #efefef;
+        justify-content: center;
+        padding: 10px;
+        border-bottom: 3px solid #efefef;
+    }
+    .tab-title.active {
+        border-bottom-color: #34808f;
+    }
+}
+
+.form-title {
+    padding: 20px 15px;
+
+    .live-info {
+        color: #53565a;
+        font-weight: 700;
+
+        span.url {
+            color: #34808f;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+    }
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: space-evenly;
+
+    .form-control {
+        padding: 10px 15px;
+    }
+}
+
+.form-nav {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px;
+    flex-direction: row-reverse;
+
+    .nav-ctrl {
+        background-color: #efefef;
+        display: flex;
+        align-items: center;
+
+        span.key {
+            padding: 10px;
+            cursor: pointer;
+            color: #53565a;
+            margin: 0px 10px;
+
+            &:not(.disabled):hover {
+                background-color: #34808f;
+                color: #efefef;
+            }
+
+            &.disabled {
+                color: #ccc;
+                cursor: default;
+            }
+        }
+
+        label {
+            color: #53565a;
+            font-size: 14px;
+        }
+
+        span.number-box {
+            padding: 5px 10px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            margin: 5px 10px;
+            color: #34808f;
+            font-weight: 700;
+        }
+    }
+
+    .export i,
+    .deactivate i {
+        margin: 0px 5px;
+    }
+}
+
+.no-resp.ng-star-inserted {
+    color: #53565a;
+    padding: 15px;
+    margin: 10px;
+    font-weight: 700;
+    font-size: 20px;
+
+    i{
+        font-size: 25px;
+        vertical-align: bottom;
+    }
+}

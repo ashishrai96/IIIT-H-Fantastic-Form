@@ -1,5 +1,8 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "cli": {
+    "analytics": "945469d9-e394-4667-809f-f8c73160e5d0"
+  },
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
@@ -32,6 +35,7 @@
             ],
             "styles": [
               "src/styles.scss",
+              "node_modules/chart.js/dist/Chart.js",
               "node_modules/primeicons/primeicons.css",
               "node_modules/primeng/resources/themes/saga-blue/theme.css",
               "node_modules/primeng/resources/primeng.min.css"

@@ -1,0 +1,17 @@
+<div class="submit-container">
+    <div class="submit-title" *ngIf="showThanks">
+        <i class="pi pi-check-circle"></i>
+        Thank You
+    </div>
+    <div class="submit-title inactive" *ngIf="!showThanks">
+        <i class="pi pi-ban"></i>
+        Form Not Active
+    </div>
+    <div class="summary">
+        This form doesn't accept any response!!
+    </div>
+    <div class="msg">
+        Go to
+        <span class="link-text" (click)="gotoHome()">Home</span>
+    </div>
+</div>

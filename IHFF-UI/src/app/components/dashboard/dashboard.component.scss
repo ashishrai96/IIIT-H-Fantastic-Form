@@ -1,0 +1,54 @@
+.box{
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+
+    .heading{
+        font-size: 36px;
+        font-weight: 700;
+        margin: 10px 0px;
+        color: #53565a;
+    }
+
+    .empty-message {
+        font-size: 17px;
+        padding: 15px;
+        color: #53565a;
+    }
+
+    .form-group {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+
+        .fileIcon {
+            color: #53565a;
+            font-size: 16px;
+            font-weight: 700;
+            text-decoration: underline;
+            cursor: pointer;
+            padding: 10px 20px;
+            margin: 0px 10px;
+            border: 1px solid #34808f;
+            border-radius: 10px;
+            width: 130px;
+            text-align: center;
+
+            i{
+                font-size: 50px;
+                margin: 10px 0px;
+                color: #34808f;
+            }
+
+            &:hover{
+                background-color: #34808f;
+                color: #efefef !important;
+
+                i{
+                    color: #efefef !important;
+                }
+            }
+        }
+    }
+}

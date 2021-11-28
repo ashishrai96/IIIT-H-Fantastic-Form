@@ -1,0 +1,16 @@
+.loader-container {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+    background-color: #34808f7a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .loader i {
+        font-size: 75px;
+        color: #efefef;
+    }
+}
