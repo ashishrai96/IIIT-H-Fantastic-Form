@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { LoaderService } from 'src/app/shared/components/loader/loader.service';
 import { Constants } from 'src/app/shared/models/constants.model';
 import { FormElement } from 'src/app/shared/models/form-element.model';
@@ -28,7 +28,8 @@ export class FormResponsesComponent implements OnInit {
 
   readonly = true;
 
-  constructor(private activateRoute: ActivatedRoute, private messageService: MessageService,
+  constructor(private activateRoute: ActivatedRoute, private router: Router,
+    private messageService: MessageService,
     private surveyBuilderService: SurveyBuilderService, private loader:LoaderService) { }
 
   ngOnInit(): void {
@@ -73,6 +74,24 @@ export class FormResponsesComponent implements OnInit {
         summary: 'Form Deactivated'
       });
       this.loadFormResponse(this.creatorId, this.formTitle);
+    },
+    err=>{
+      console.log(err);
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Something went wrong!'
+      });
+    });
+  }
+
+  deleteForm(){
+    this.surveyBuilderService.deleteForm(this.creatorId, this.formTitle).subscribe((resp:any) => {
+      console.log(resp);
+      this.messageService.add({
+        severity: 'success',
+        summary: 'Form Deleted'
+      });
+      this.router.navigateByUrl("/survey/form/dashboard");
     },
     err=>{
       console.log(err);

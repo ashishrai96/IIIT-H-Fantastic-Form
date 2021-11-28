@@ -35,4 +35,8 @@ export class SurveyBuilderService {
     return this.http.post(environment.baseUrl + environment.api.deactivate + `/${creatorId}/${formTitle}`, {});
   }
 
+  deleteForm(creatorId, formTitle){
+    return this.http.post(environment.baseUrl + environment.api.deleteFrom + `/${creatorId}/${formTitle}`, {});
+  }
+
 }

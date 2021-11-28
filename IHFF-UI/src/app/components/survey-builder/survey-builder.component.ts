@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
 import { AuthService } from 'src/app/auth/auth.service';
 import { LoginService } from '../login/service/login.service';
 import { SurveyBuilderDataExchangeService } from './survey-builder-data-exchange.service';
@@ -15,9 +16,11 @@ export class SurveyBuilderComponent implements OnInit {
   preview: boolean = false;
   isLoggedIn: boolean = false;
   userLabel: string = null;
+  userOptions = [ { name: 'Delete Account', code: 'DU' } ];
+  showOption:boolean = false;
 
   constructor(private router: Router, private loginService: LoginService,
-    private authService: AuthService,
+    private authService: AuthService, private messageService: MessageService,
     private surveyDataExchange: SurveyBuilderDataExchangeService){ }
 
   ngOnInit() {
@@ -65,6 +68,29 @@ export class SurveyBuilderComponent implements OnInit {
 
       this.router.navigate(['/']);
     });
+  }
+
+  deleteUser() {
+    this.showOption = false;
+    console.log("delete user");
+
+    this.loginService.deleteUser().subscribe((resp:any) => {
+      this.messageService.add({
+        severity: 'success',
+        summary: 'User deleted successfully'
+      });
+      this.authService.logoutUser();
+      this.userLabel = null;
+
+      this.router.navigate(['/']);
+    },
+    err => {
+      this.messageService.add({
+        severity: 'error',
+        summary: 'User deletion failed'
+      });
+    });
+
   }
 
 }
