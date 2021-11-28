@@ -32,6 +32,7 @@ const routes: Routes = [
         ]
       },
       { path: 'submitted', component: FormSubmittedComponent },
+      { path: 'deactivated', component: FormSubmittedComponent },
       { path: 'login', component: LoginComponent },
       { path: 'signup', component: SignupComponent },
       { path: '', pathMatch: 'full', redirectTo: 'login' },

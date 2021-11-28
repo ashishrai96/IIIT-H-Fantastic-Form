@@ -6,13 +6,19 @@
 <div class="form-title">
     <h1>{{ formTitle }}</h1>
     <div class="live-info">
+        <span class="indicator" [ngStyle]="{'color':(formActive)?'#22e900':'#fd1212'}">
+            <i class="pi pi-circle-on"></i>
+        </span>
         Live at: 
         <span class="url" (click)="goToLiveForm()">{{ liveUrl }}</span>
     </div>
 </div>
 <ng-container *ngIf="formArray?.length>0 else noRespTemplate">
     <div class="form-nav">
-        <button class="btn primary export" (click)="exportExcel()"><i class="pi pi-file-excel"></i>Export</button>
+        <div class="btn-grp">
+            <button class="btn secondary deactivate" (click)="deactivateForm()" *ngIf="formActive"><i class="pi pi-ban"></i>Deactivate</button>
+            <button class="btn primary export" (click)="exportExcel()"><i class="pi pi-file-excel"></i>Export</button>
+        </div>
         <div class="nav-ctrl" *ngIf="activeTab==1">
             <span [ngClass]="{'disabled': currentIndex==0}" class="key left-key" (click)="loadIndividualForm(currentIndex-1)">
                 <i class="pi pi-chevron-left"></i>

@@ -26,7 +26,7 @@
       <div class="action-grp">
         <ng-container *ngIf="showActionGroup">
           <div class="action-item">
-            <button class="btn secondary" (click)="togglePreview()">Preview</button>
+            <button class="btn secondary" (click)="togglePreview()">{{ preview?'Go Back' : 'Preview'}}</button>
           </div>
           <div class="action-item">
             <button class="btn primary" (click)="publishForm()">Publish</button>

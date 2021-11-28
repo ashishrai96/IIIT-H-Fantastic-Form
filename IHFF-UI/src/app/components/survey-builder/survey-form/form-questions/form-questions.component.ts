@@ -186,6 +186,7 @@ export class FormQuestionsComponent implements OnInit {
     this.surveyService.saveForm(form).subscribe((resp:any) => {
       console.log("Response for save => ", resp);
       this.loader.stop();
+      this.messageService.add({ severity:'success', summary:'Form Published', detail: 'check dashboard for published URL.' });
       this.router.navigateByUrl("/survey/form/dashboard");
     },
     err => {

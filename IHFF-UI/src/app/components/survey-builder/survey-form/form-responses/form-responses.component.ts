@@ -6,6 +6,7 @@ import { FormElement } from 'src/app/shared/models/form-element.model';
 import { SurveyBuilderService } from '../../survey-builder.service';
 import * as Exceljs from "exceljs";
 import * as FileSaver from "file-saver";
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-form-responses',
@@ -19,19 +20,22 @@ export class FormResponsesComponent implements OnInit {
   questionArray: any[] = [];
   graph = {};
   liveUrl: string;
-
+  formActive:boolean = false;
   activeTab:number = 0;
   indivForm:FormElement;
   currentIndex:number = 0;
+  creatorId: number;
 
   readonly = true;
 
-  constructor(private activateRoute: ActivatedRoute, 
+  constructor(private activateRoute: ActivatedRoute, private messageService: MessageService,
     private surveyBuilderService: SurveyBuilderService, private loader:LoaderService) { }
 
   ngOnInit(): void {
     this.activateRoute.params.subscribe((params: Params) => {
       if(params && params['creatorId'] && params['title']){
+        this.formTitle = params['title'];
+        this.creatorId = params['creatorId'];
         this.loadFormResponse(params['creatorId'], params['title']);
       }
     });
@@ -61,11 +65,30 @@ export class FormResponsesComponent implements OnInit {
     this.currentIndex = idx;
   }
 
+  deactivateForm(){
+    this.surveyBuilderService.deactivateForm(this.creatorId, this.formTitle).subscribe((resp:any) => {
+      console.log(resp);
+      this.messageService.add({
+        severity: 'success',
+        summary: 'Form Deactivated'
+      });
+      this.loadFormResponse(this.creatorId, this.formTitle);
+    },
+    err=>{
+      console.log(err);
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Something went wrong!'
+      });
+    });
+  }
+
   loadFormResponse(creatorId, formTitle){
     this.loader.start();
     this.surveyBuilderService.loadResponseByFormId(creatorId, formTitle).subscribe((resp:any) => {
       console.log(resp);
       this.formTitle = formTitle;
+      this.formActive = resp.active;
       this.formArray = [ ...resp.response ];
       console.log("formArray==", this.formArray);
       this.graph = {};
@@ -152,6 +175,7 @@ export class FormResponsesComponent implements OnInit {
     });
   }
 
+
   async exportExcel() {
     if(this.formArray.length <= 0){
       return;
@@ -169,13 +193,10 @@ export class FormResponsesComponent implements OnInit {
         { header: ques.question,
           key: String(ques.questionId),
           width: 40,
-          outlineLevel: 1,
-          font: { bold: true, color: { argb: '34808f0f' } }
         },
       ];
     });
 
-    // worksheet.addRow({id: 1, name: 'John Doe', dob: new Date(1970,1,1)});
     this.formArray.forEach((form: any) => {
       let items:FormElement[] = form.items;
       let resp = {};
@@ -193,6 +214,33 @@ export class FormResponsesComponent implements OnInit {
       });
       sheet.addRow({...resp});
     });
+
+    sheet.eachRow((row, rowNumber) => {
+      row.eachCell((cell, colNumber) => {
+        if(rowNumber == 1 && cell.value){
+          row.getCell(colNumber).fill = {
+            type: 'pattern', pattern: 'darkGrid', fgColor: { argb: '73989D' }
+          };
+          row.getCell(colNumber).font = {
+            bold: true, size: 16
+          };
+          row.getCell(colNumber).border = {
+            top: { style: 'thick' },
+            right: { style: 'thick' },
+            bottom: { style: 'thick' },
+            left: { style: 'thick' }
+          };
+        }
+        else if(cell.value){
+          row.getCell(colNumber).border = {
+            top: { style: 'thin' },
+            right: { style: 'thin' },
+            bottom: { style: 'thin' },
+            left: { style: 'thin' }
+          };
+        }
+      });
+  });
 
     let blobType: string = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8";
     workbook.xlsx.writeBuffer().then(data => {

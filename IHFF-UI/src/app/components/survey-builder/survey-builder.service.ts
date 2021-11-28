@@ -31,4 +31,8 @@ export class SurveyBuilderService {
     return this.http.post(environment.baseUrl + environment.api.submitForm + `/${creatorId}/${formTitle}`, req);
   }
 
+  deactivateForm(creatorId, formTitle){
+    return this.http.post(environment.baseUrl + environment.api.deactivate + `/${creatorId}/${formTitle}`, {});
+  }
+
 }

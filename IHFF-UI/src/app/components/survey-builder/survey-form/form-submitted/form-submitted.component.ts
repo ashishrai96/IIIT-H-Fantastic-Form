@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 
 @Component({
   selector: 'app-form-submitted',
@@ -9,10 +9,28 @@ import { Router } from '@angular/router';
 export class FormSubmittedComponent implements OnInit {
 
   message: string;
+  showThanks: boolean = true;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private activatedRoute: ActivatedRoute) {
+    if(this.router.url == "/survey/deactivated") {
+      this.showThanks = false;
+    }
+
+    this.router.events.subscribe((val) => {
+      if(val instanceof NavigationEnd){
+        console.log(val);
+        if(val.url == "/survey/deactivated" || val.urlAfterRedirects == "/survey/deactivated") {
+          this.showThanks = false;
+        }
+        else{
+          this.showThanks = true;
+        }
+      }
+    });
+  }
 
   ngOnInit(): void {
+    
   }
 
   gotoHome(){

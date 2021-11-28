@@ -9,6 +9,10 @@
         i {
             font-size: 75px;
         }
+
+        &.inactive {
+                color: #e54343;
+        }
     }
 
     .summary {

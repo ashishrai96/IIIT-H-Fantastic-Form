@@ -1,10 +1,14 @@
 <div class="submit-container">
-    <div class="submit-title">
+    <div class="submit-title" *ngIf="showThanks">
         <i class="pi pi-check-circle"></i>
         Thank You
     </div>
+    <div class="submit-title inactive" *ngIf="!showThanks">
+        <i class="pi pi-ban"></i>
+        Form Not Active
+    </div>
     <div class="summary">
-        Your response is with us!!
+        This form doesn't accept any response!!
     </div>
     <div class="msg">
         Go to

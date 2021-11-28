@@ -62,12 +62,12 @@ export class SignupComponent implements OnInit {
     this.signupService.signup(this.firstname, this.lastname, this.email, this.password).subscribe((resp: any) => {
       console.log(resp);
       if(resp.status == 201){
-        this.messageService.add({severity:'success', summary:'Success, proceed with Login', detail: resp.message});
-        this.router.navigateByUrl("/survey/login");
-
+        this.messageService.add({severity:'success', summary:'Successfully Registered!!', detail: resp.message});
+        
         let fi = resp.firstname && resp.firstname.length>0?resp.firstname[0]:'';
         let li = resp.lastname && resp.lastname.length>0?resp.lastname[0]:'';
         this.authService.loginUser(this.email, resp.access_token, resp.id, fi+li);
+        this.router.navigateByUrl("/survey/form/dashboard");
       }
       else{
         this.messageService.add({severity:'error', summary:'Error', detail: resp.message});

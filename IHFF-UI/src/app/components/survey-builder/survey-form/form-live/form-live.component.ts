@@ -34,6 +34,9 @@ export class FormLiveComponent implements OnInit {
           this.formData = resp;
           this.formTitle = resp.title;
           this.loader.stop();
+          if(!resp.active){
+            this.router.navigateByUrl("/survey/deactivated", {  })
+          }
         },
         err => {
           console.error(err);
