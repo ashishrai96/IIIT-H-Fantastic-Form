@@ -77,3 +77,190 @@
 - User is supposed to login/register, before filling the form.
 - Using Sha3_256 hashing algorithm to protect passwords.
 - Audio format for transcript generation must be mp3 only.
+
+>## Folder Structure
+    .
+    ├── IHFF-API
+    │   ├── README.md
+    │   ├── __pycache__
+    │   │   └── db.cpython-38.pyc
+    │   ├── app.py
+    │   ├── db.py
+    │   ├── models
+    │   │   ├── __init__.py
+    │   │   ├── __pycache__
+    │   │   │   ├── __init__.cpython-38.pyc
+    │   │   │   ├── __init__.cpython-39.pyc
+    │   │   │   ├── form.cpython-38.pyc
+    │   │   │   ├── form.cpython-39.pyc
+    │   │   │   ├── item.cpython-39.pyc
+    │   │   │   ├── option.cpython-38.pyc
+    │   │   │   ├── question.cpython-38.pyc
+    │   │   │   ├── question.cpython-39.pyc
+    │   │   │   ├── response.cpython-38.pyc
+    │   │   │   ├── statement.cpython-38.pyc
+    │   │   │   ├── store.cpython-39.pyc
+    │   │   │   ├── user.cpython-38.pyc
+    │   │   │   └── user.cpython-39.pyc
+    │   │   ├── form.py
+    │   │   ├── option.py
+    │   │   ├── question.py
+    │   │   ├── response.py
+    │   │   ├── statement.py
+    │   │   └── user.py
+    │   ├── requirements.txt
+    │   └── resources
+    │       ├── __init__.py
+    │       ├── __pycache__
+    │       │   ├── __init__.cpython-38.pyc
+    │       │   ├── form.cpython-38.pyc
+    │       │   ├── question.cpython-38.pyc
+    │       │   ├── response.cpython-38.pyc
+    │       │   ├── transcript.cpython-38.pyc
+    │       │   └── user.cpython-38.pyc
+    │       ├── form.py
+    │       ├── question.py
+    │       ├── response.py
+    │       ├── transcript.py
+    │       └── user.py
+    ├── IHFF-UI
+    │   ├── README.md
+    │   ├── angular.json
+    │   ├── karma.conf.js
+    │   ├── package-lock.json
+    │   ├── package.json
+    │   ├── src
+    │   │   ├── app
+    │   │   │   ├── app-routing.module.ts
+    │   │   │   ├── app.component.html
+    │   │   │   ├── app.component.scss
+    │   │   │   ├── app.component.spec.ts
+    │   │   │   ├── app.component.ts
+    │   │   │   ├── app.module.ts
+    │   │   │   ├── auth
+    │   │   │   │   ├── auth-guard.service.ts
+    │   │   │   │   ├── auth-interceptor.service.ts
+    │   │   │   │   └── auth.service.ts
+    │   │   │   ├── components
+    │   │   │   │   ├── audio-transcript
+    │   │   │   │   │   └── audio-transcript.component.scss
+    │   │   │   │   ├── dashboard
+    │   │   │   │   │   ├── dashboard.component.html
+    │   │   │   │   │   ├── dashboard.component.scss
+    │   │   │   │   │   ├── dashboard.component.spec.ts
+    │   │   │   │   │   └── dashboard.component.ts
+    │   │   │   │   ├── login
+    │   │   │   │   │   ├── login.component.html
+    │   │   │   │   │   ├── login.component.scss
+    │   │   │   │   │   ├── login.component.spec.ts
+    │   │   │   │   │   ├── login.component.ts
+    │   │   │   │   │   └── service
+    │   │   │   │   │       └── login.service.ts
+    │   │   │   │   ├── signup
+    │   │   │   │   │   ├── service
+    │   │   │   │   │   │   └── signup.service.ts
+    │   │   │   │   │   ├── signup.component.html
+    │   │   │   │   │   ├── signup.component.scss
+    │   │   │   │   │   ├── signup.component.spec.ts
+    │   │   │   │   │   └── signup.component.ts
+    │   │   │   │   └── survey-builder
+    │   │   │   │       ├── audio-transcript
+    │   │   │   │       │   ├── audio-transcript.component.html
+    │   │   │   │       │   ├── audio-transcript.component.scss
+    │   │   │   │       │   ├── audio-transcript.component.spec.ts
+    │   │   │   │       │   ├── audio-transcript.component.ts
+    │   │   │   │       │   └── service
+    │   │   │   │       │       └── audio-transcript.service.ts
+    │   │   │   │       ├── survey-builder-data-exchange.service.ts
+    │   │   │   │       ├── survey-builder.component.html
+    │   │   │   │       ├── survey-builder.component.scss
+    │   │   │   │       ├── survey-builder.component.spec.ts
+    │   │   │   │       ├── survey-builder.component.ts
+    │   │   │   │       ├── survey-builder.service.ts
+    │   │   │   │       └── survey-form
+    │   │   │   │           ├── form-live
+    │   │   │   │           │   ├── form-live.component.html
+    │   │   │   │           │   ├── form-live.component.scss
+    │   │   │   │           │   ├── form-live.component.spec.ts
+    │   │   │   │           │   └── form-live.component.ts
+    │   │   │   │           ├── form-questions
+    │   │   │   │           │   ├── form-card
+    │   │   │   │           │   │   ├── form-card.component.html
+    │   │   │   │           │   │   ├── form-card.component.scss
+    │   │   │   │           │   │   ├── form-card.component.spec.ts
+    │   │   │   │           │   │   ├── form-card.component.ts
+    │   │   │   │           │   │   └── form-likert-scale
+    │   │   │   │           │   │       ├── form-likert-scale.component.html
+    │   │   │   │           │   │       ├── form-likert-scale.component.scss
+    │   │   │   │           │   │       ├── form-likert-scale.component.spec.ts
+    │   │   │   │           │   │       └── form-likert-scale.component.ts
+    │   │   │   │           │   ├── form-questions.component.html
+    │   │   │   │           │   ├── form-questions.component.scss
+    │   │   │   │           │   ├── form-questions.component.spec.ts
+    │   │   │   │           │   └── form-questions.component.ts
+    │   │   │   │           ├── form-responses
+    │   │   │   │           │   ├── form-response-card
+    │   │   │   │           │   │   ├── form-response-card.component.html
+    │   │   │   │           │   │   ├── form-response-card.component.scss
+    │   │   │   │           │   │   ├── form-response-card.component.spec.ts
+    │   │   │   │           │   │   └── form-response-card.component.ts
+    │   │   │   │           │   ├── form-responses.component.html
+    │   │   │   │           │   ├── form-responses.component.scss
+    │   │   │   │           │   ├── form-responses.component.spec.ts
+    │   │   │   │           │   └── form-responses.component.ts
+    │   │   │   │           ├── form-submitted
+    │   │   │   │           │   ├── form-submitted.component.html
+    │   │   │   │           │   ├── form-submitted.component.scss
+    │   │   │   │           │   ├── form-submitted.component.spec.ts
+    │   │   │   │           │   └── form-submitted.component.ts
+    │   │   │   │           ├── survey-form.component.html
+    │   │   │   │           ├── survey-form.component.scss
+    │   │   │   │           ├── survey-form.component.spec.ts
+    │   │   │   │           └── survey-form.component.ts
+    │   │   │   └── shared
+    │   │   │       ├── components
+    │   │   │       │   ├── loader
+    │   │   │       │   │   ├── loader.component.html
+    │   │   │       │   │   ├── loader.component.scss
+    │   │   │       │   │   ├── loader.component.spec.ts
+    │   │   │       │   │   ├── loader.component.ts
+    │   │   │       │   │   └── loader.service.ts
+    │   │   │       │   └── not-found
+    │   │   │       │       ├── not-found.component.html
+    │   │   │       │       ├── not-found.component.scss
+    │   │   │       │       ├── not-found.component.spec.ts
+    │   │   │       │       └── not-found.component.ts
+    │   │   │       ├── models
+    │   │   │       │   ├── constants.model.ts
+    │   │   │       │   └── form-element.model.ts
+    │   │   │       └── shared.module.ts
+    │   │   ├── assets
+    │   │   │   ├── images
+    │   │   │   │   └── favicon.ico
+    │   │   │   ├── json
+    │   │   │   │   ├── common.json
+    │   │   │   │   ├── login.json
+    │   │   │   │   └── signup.json
+    │   │   │   └── scss
+    │   │   │       ├── button.scss
+    │   │   │       ├── inputs.scss
+    │   │   │       ├── p-avatar.scss
+    │   │   │       ├── p-dataview.scss
+    │   │   │       ├── p-dropdown.scss
+    │   │   │       ├── p-inputswitch.scss
+    │   │   │       ├── p-orderlist.scss
+    │   │   │       ├── p-radio-check.scss
+    │   │   │       └── p-togglebutton.scss
+    │   │   ├── environments
+    │   │   │   ├── environment.prod.ts
+    │   │   │   └── environment.ts
+    │   │   ├── favicon.ico
+    │   │   ├── index.html
+    │   │   ├── main.ts
+    │   │   ├── polyfills.ts
+    │   │   ├── styles.scss
+    │   │   └── test.ts
+    │   ├── tsconfig.app.json
+    │   ├── tsconfig.json
+    │   └── tsconfig.spec.json
+    └── README.md
